@@ -184,6 +184,7 @@ public class SubmitPanel extends JPanel implements ActionListener, MouseListener
 		
 		JLabel tagLabel = new JLabel("タグ:");
 		tagField = new JTextField();
+		tagField.addActionListener(this);
 		addButton = new JButton("追加");
 		addButton.addActionListener(this);
 		tagLabel.setFont(new Font("メイリオ", Font.PLAIN, 18));
@@ -244,18 +245,19 @@ public class SubmitPanel extends JPanel implements ActionListener, MouseListener
 	}
 	
 	private static final int offsetX = 4,offsetY = 340;
+	private static final int tagWidth = 9;
 	private void reloadTag(){
 		for(TagLabel tag:tags){
 			this.remove(tag);
 		}
-		int x = 6,y = 0,count = 0;
+		int x = 8,y = 0,count = 0;
 		for(TagLabel tag:tags){
-			if((offsetX+x*9+count*6+tag.getLength()*TagLabel.width) > (panelWidth-4)){
+			if((offsetX+x*TagLabel.width+count*6+tag.getLength()*TagLabel.width) > (panelWidth-4)){
 				///はみだすので改行
 				x = 0;y++;count = 0;
 				if(y == 2)break;///３行目は無いので追加を諦める
 			}
-			tag.reloadBounds(offsetX+x*9+count*6, offsetY+y*28);
+			tag.reloadBounds(offsetX+x*TagLabel.width+count*6, offsetY+y*28);
 			this.add(tag);
 			x+=tag.getLength();
 			count++;
@@ -274,7 +276,9 @@ public class SubmitPanel extends JPanel implements ActionListener, MouseListener
 		if(event.getSource().equals(addButton)){
 			String target = tagField.getText();
 			if(target.equalsIgnoreCase(""))return;///空文字ならダメ
-			addTag(target);
+			if(target.length()>1){
+				addTag(target);
+			}
 			tagField.setText("");
 		}else if(event.getSource().equals(submitButton)){
 			if(titleField.getText().equalsIgnoreCase(""))return;
@@ -292,6 +296,8 @@ public class SubmitPanel extends JPanel implements ActionListener, MouseListener
 					source.repaint();
 				}
 			});
+		}else if(event.getSource().equals(tagField)){
+			addButton.doClick();
 		}
 	}
 

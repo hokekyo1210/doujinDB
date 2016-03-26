@@ -32,8 +32,9 @@ public class Circle extends DefaultMutableTreeNode{
 		this.add(node.getTreeNode());
 		this.setUserObject(circleName+"("+(nodes.size())+")");
 	}
-	public void removeNode(Node node){///未実装！！！！！
+	public void removeNode(Node node){///実装したで
 		nodes.remove(node);
+		this.setUserObject(circleName+"("+(nodes.size())+")");
 	}
 	public int getNodeCount(){
 		return nodes.size();

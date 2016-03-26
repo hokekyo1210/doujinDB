@@ -11,7 +11,7 @@ import com.sun.xml.internal.ws.util.StringUtils;
 
 public class TagLabel extends JLabel{
 	
-	public static final int width = 9;
+	public static final int width = 6;
 	private static final Color backGround = Color.WHITE;
 	private static final Color otherColor = new Color(246,255,247);
 	
