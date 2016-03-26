@@ -5,21 +5,22 @@ import java.util.HashMap;
 
 import javax.swing.tree.DefaultMutableTreeNode;
 
-public class Root {
+public class Root extends DefaultMutableTreeNode{
 	
 	private String name;
 	private HashMap<String,Circle> circles;///エッジが多くなることが予想されるので
 										   ///ArrayListは使わない
-	private DefaultMutableTreeNode treeNode;
+//	private DefaultMutableTreeNode treeNode;
 	
 	public Root(String name){
+		super(name);
 		this.name = name;
 		circles = new HashMap<String,Circle>();
-		treeNode = new DefaultMutableTreeNode(name);
+//		treeNode = new DefaultMutableTreeNode(name);
 	}
 	
 	public DefaultMutableTreeNode getTreeNode(){
-		return treeNode;
+		return this;
 	}
 	
 	public Collection<Circle> getCircles(){
@@ -28,7 +29,7 @@ public class Root {
 	
 	public void addCircle(Circle circle){
 		circles.put(circle.getCircleName(), circle);
-		treeNode.add(circle.getTreeNode());
+		this.add(circle.getTreeNode());
 	}
 	
 	public void removeCircle(Circle circle){

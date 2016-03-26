@@ -7,7 +7,7 @@ import java.util.List;
 
 import javax.swing.tree.DefaultMutableTreeNode;
 
-public class Node {
+public class Node extends DefaultMutableTreeNode{
 	
 	public String title;
 	public String circle;
@@ -20,10 +20,9 @@ public class Node {
 	
 	public Date exDate = null;
 	
-	private DefaultMutableTreeNode treeNode;
-	
 	public Node(String title,String circle,String artist,String date,List<String> tags,
 				String comment,String image,String thumb){
+		super(title);
 		this.title = title;
 		this.circle = circle;
 		this.artist = artist;
@@ -33,7 +32,7 @@ public class Node {
 		this.image = image;
 		this.thumb = thumb;
 		
-		treeNode = new DefaultMutableTreeNode(title);
+		///treeNode = new DefaultMutableTreeNode(title);
 		if(!date.equals("None")){
 			SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 			try {
@@ -46,7 +45,7 @@ public class Node {
 	}
 	
 	public DefaultMutableTreeNode getTreeNode(){
-		return treeNode;
+		return this;
 	}
 
 }

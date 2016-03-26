@@ -5,21 +5,22 @@ import java.util.List;
 
 import javax.swing.tree.DefaultMutableTreeNode;
 
-public class Circle {
+public class Circle extends DefaultMutableTreeNode{
 	
 	private String circleName;
 	private List<Node> nodes;
 	
-	private DefaultMutableTreeNode treeNode;
+	///private DefaultMutableTreeNode treeNode;
 	
 	public Circle(String circleName){
+		super(circleName);
 		this.circleName = circleName;
 		nodes = new ArrayList<Node>();
-		treeNode = new DefaultMutableTreeNode(circleName);
+		///treeNode = new DefaultMutableTreeNode(circleName);
 	}
 	
 	public DefaultMutableTreeNode getTreeNode(){
-		return treeNode;
+		return this;
 	}
 	
 	public List<Node> getNodes(){
@@ -28,8 +29,8 @@ public class Circle {
 	
 	public void addNode(Node node){
 		nodes.add(node);
-		treeNode.add(node.getTreeNode());
-		treeNode.setUserObject(circleName+"("+(nodes.size())+")");
+		this.add(node.getTreeNode());
+		this.setUserObject(circleName+"("+(nodes.size())+")");
 	}
 	public void removeNode(Node node){///未実装！！！！！
 		nodes.remove(node);
