@@ -5,7 +5,7 @@ import java.util.List;
 
 import javax.swing.tree.DefaultMutableTreeNode;
 
-public class Circle extends DefaultMutableTreeNode{
+public class Circle extends MyNode{
 	
 	private String circleName;
 	private List<Node> nodes;

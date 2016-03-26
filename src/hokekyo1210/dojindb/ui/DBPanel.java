@@ -27,6 +27,7 @@ import javax.swing.tree.TreeNode;
 import javax.swing.tree.TreePath;
 
 import hokekyo1210.dojindb.sql.Circle;
+import hokekyo1210.dojindb.sql.MyNode;
 import hokekyo1210.dojindb.sql.Node;
 import hokekyo1210.dojindb.sql.Root;
 import hokekyo1210.dojindb.sql.SQLManager;
@@ -61,16 +62,33 @@ public class DBPanel extends JPanel implements MouseListener{
 			DefaultMutableTreeNode tableNode = r.getTreeNode();
 			rootNode.add(tableNode);
 		}
-		model.reload();
+		treeRefresh();
 		this.repaint();
 	}
 	
 	public static void treeRefresh(){
+		List<DefaultMutableTreeNode> open = new ArrayList<DefaultMutableTreeNode>();///äJÇ¢ÇΩèÛë‘Çà€éùÇ∑ÇÈ
+		for(int r = 0;r < jTree.getRowCount();r++){
+			TreePath path = jTree.getPathForRow(r);
+			DefaultMutableTreeNode n = (DefaultMutableTreeNode) path.getLastPathComponent();
+			if(jTree.isExpanded(path) && n instanceof MyNode){
+				MyNode mn = (MyNode) n;
+				if(mn.isDead())continue;
+				open.add(n);
+			}
+		}
 		model.reload();
+		for(int r = 0;r < jTree.getRowCount();r++){
+			TreePath path = jTree.getPathForRow(r);
+			DefaultMutableTreeNode n = (DefaultMutableTreeNode) path.getLastPathComponent();
+			if(open.contains(n)){
+				jTree.expandPath(path);
+			}
+		}
 	}
-	public static void treeRefresh(TreeNode node){
+	/*public static void treeRefresh(TreeNode node){
 		model.nodeStructureChanged(node);
-	}
+	}*/
 	
 	public static void addNewTable(Root table){
 		rootNode.add(table);
@@ -95,8 +113,10 @@ public class DBPanel extends JPanel implements MouseListener{
 				Circle c = (Circle)node;
 				Root r = (Root)parent;
 				r.removeCircle(c);
+				c.setDead(true);
 			}else if(node instanceof Root){
 				roots.add((Root) node);
+				((Root)node).setDead(true);
 			}
 			if(parent != null){
 				parent.remove(node);
@@ -111,7 +131,8 @@ public class DBPanel extends JPanel implements MouseListener{
 		}
 		
 		if(selection.size() == 1){///1å¬Ç»ÇÁçXêVÇç≈è¨å¿Ç…
-			treeRefresh(last);
+//			treeRefresh(last);
+			treeRefresh();
 		}else{
 			treeRefresh();
 		}

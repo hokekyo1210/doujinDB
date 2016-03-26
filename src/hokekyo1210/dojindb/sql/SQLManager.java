@@ -161,7 +161,8 @@ public class SQLManager {
 				target = r.getTreeNode();
 			}else target = c.getTreeNode();
 			c.addNode(node);
-			DBPanel.treeRefresh(target);///ツリーに変更を伝える
+//			DBPanel.treeRefresh(target);///ツリーに変更を伝える
+			DBPanel.treeRefresh();
 			break;
 		}
 	}

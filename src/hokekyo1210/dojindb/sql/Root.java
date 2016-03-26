@@ -5,7 +5,7 @@ import java.util.HashMap;
 
 import javax.swing.tree.DefaultMutableTreeNode;
 
-public class Root extends DefaultMutableTreeNode{
+public class Root extends MyNode{
 	
 	private String name;
 	private HashMap<String,Circle> circles;///エッジが多くなることが予想されるので
