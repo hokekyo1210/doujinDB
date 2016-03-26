@@ -80,7 +80,7 @@ public class SQLManager {
 					String thumb = ret.getString("thumb");
 					List<String> tags = Arrays.asList(tag.split("_"));
 					System.out.println(title+" "+circle+" "+artist+" "+date+" "+tag+"("+tags.size()+") "+comment+" "+image+" "+thumb);
-					Node node = new Node(title,circle,artist,date,tags,comment,image,thumb);
+					Node node = new Node(title,circle,artist,date,tags,comment,image,thumb,r.getName());
 					stock.add(node);
 				}
 				Collections.sort(stock,new NodeComp());///データのソートを実行
@@ -118,6 +118,36 @@ public class SQLManager {
 		}catch(Exception e){System.out.println(tableName+" Already.");}
 	}
 	
+	public static void addNewTable(String tableName){///新しいテーブルを追加
+		for(Root r : tables){
+			if(r.getName().equals(tableName))return;///同じ名前のテーブルあるならダメ
+		}
+		createTable(tableName);
+		Root newTable = new Root(tableName);
+		tables.add(newTable);
+		DBPanel.addNewTable(newTable);
+	}
+	
+	public static void removeNode(Node node){///DBからNodeを消す
+		///DELETE FROM user WHERE title = '名前' AND circle = 'サークル'
+		String query = "DELETE FROM '"+node.table+"' WHERE title = '"+node.title+"' AND circle = '"+node.circle+"'";
+		try {
+			query2(query);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static void removeTable(Root root){///テーブル削除、テーブル内のノードが全部先に消えてないとダメだよ！
+		///DROP TABLE '同人誌'
+		String query = "DROP TABLE '"+root.getName()+"'";
+		try {
+			query2(query);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
 	public static void addNode(String table,Node node){///木にノードを追加O(RlogC) R:テーブルの数
 		for(Root r:tables){
 			if(!r.getName().equals(table))continue;
@@ -136,8 +166,28 @@ public class SQLManager {
 		}
 	}
 	
+	public static boolean isExist(String table,String title,String circle){///データ重複判定
+		///SELECT * FROM 'テーブル' WHERE title = '名前' AND circle = 'サークル'
+		String query = "SELECT * FROM '"+table+"' WHERE title = '"+title+"' AND circle = '"+circle+"'";
+		try{
+			ResultSet ret = query(query);
+			int i = 0;
+			while(ret.next()){
+				i++;
+			}
+			if(i >= 1)return true;
+		}catch(Exception e){
+			e.printStackTrace();
+			return true;
+		}
+		return false;
+	}
+	
 	public static boolean addData(String table,String title,String circle,String artist,String date,List<String> tags,String comment,String image,String thumb){
 		///INSERT INTO user VALUES(title,circle,artist,date,tag,comment,dir)
+		if(isExist(table,title,circle)){///データが重複してたらダメよ
+			return false;
+		}
 		String tag = "None";
 		if(tags.size() != 0){
 			tag = "";
@@ -149,12 +199,12 @@ public class SQLManager {
 		String query = "INSERT INTO "+table+" VALUES('"+title+"','"+circle+"','"+artist+"','"+date+"','"+tag+"','"+comment+"','"+image+"','"+thumb+"')";
 		try {
 			query2(query);
-			addNode(table,new Node(title,circle,artist,date,tags,comment,image,thumb));///クエリ飛ばしたら木への追加も行う
-			return true;
 		} catch (Exception e) {
 			e.printStackTrace();
 			return false;
 		}
+		addNode(table,new Node(title,circle,artist,date,tags,comment,image,thumb,table));///クエリ飛ばしたら木への追加も行う
+		return true;
 	}
 
 }

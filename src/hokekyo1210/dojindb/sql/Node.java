@@ -18,10 +18,12 @@ public class Node extends DefaultMutableTreeNode{
 	public String image;
 	public String thumb;
 	
+	public String table;
+	
 	public Date exDate = null;
 	
 	public Node(String title,String circle,String artist,String date,List<String> tags,
-				String comment,String image,String thumb){
+				String comment,String image,String thumb,String table){
 		super(title);
 		this.title = title;
 		this.circle = circle;
@@ -31,6 +33,7 @@ public class Node extends DefaultMutableTreeNode{
 		this.comment = comment;
 		this.image = image;
 		this.thumb = thumb;
+		this.table = table;
 		
 		///treeNode = new DefaultMutableTreeNode(title);
 		if(!date.equals("None")){

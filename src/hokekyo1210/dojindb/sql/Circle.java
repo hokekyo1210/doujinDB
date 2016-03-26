@@ -35,6 +35,9 @@ public class Circle extends DefaultMutableTreeNode{
 	public void removeNode(Node node){///未実装！！！！！
 		nodes.remove(node);
 	}
+	public int getNodeCount(){
+		return nodes.size();
+	}
 	
 	public String getCircleName(){
 		return circleName;
