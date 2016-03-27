@@ -66,7 +66,8 @@ public class DBPanel extends JPanel implements MouseListener{
 		this.repaint();
 	}
 	
-	public static void treeRefresh(){
+	public static void treeRefresh(){///JTreeをリフレッシュするけどそれまでに開いてたパスを維持する
+		long start = System.currentTimeMillis();
 		List<DefaultMutableTreeNode> open = new ArrayList<DefaultMutableTreeNode>();///開いた状態を維持する
 		for(int r = 0;r < jTree.getRowCount();r++){
 			TreePath path = jTree.getPathForRow(r);
@@ -85,6 +86,8 @@ public class DBPanel extends JPanel implements MouseListener{
 				jTree.expandPath(path);
 			}
 		}
+		jTree.repaint();
+		System.out.println("Refresh completed. ["+(System.currentTimeMillis() - start)+" ms]");
 	}
 	/*public static void treeRefresh(TreeNode node){
 		model.nodeStructureChanged(node);
