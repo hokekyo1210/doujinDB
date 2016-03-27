@@ -54,6 +54,8 @@ public class Crawler implements Runnable{
 			System.out.println(id+" "+title+" "+circle);
 			results.add(new SearchResult(id,title,circle));
 		}
+		if(results.size() != 0)
+			source.showPopup(results);
 	}
 
 	@Override

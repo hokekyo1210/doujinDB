@@ -31,7 +31,7 @@ public class MyDropFileHandler extends TransferHandler{
 		return false;
 	}
 	
-	private BufferedImage convert(File file) throws Exception{///‰æ‘œ‚ğ220*300‚É‡‚í‚¹‚é
+	public static BufferedImage convert(File file,MyImageLabel target) throws Exception{///‰æ‘œ‚ğ220*300‚É‡‚í‚¹‚é
 		BufferedImage source = ImageIO.read(file);
 		int fwidth = source.getWidth();
 		int fheight = source.getHeight();
@@ -79,7 +79,7 @@ public class MyDropFileHandler extends TransferHandler{
 			List<File> files = (List<File>) t.getTransferData(DataFlavor.javaFileListFlavor);
 			File get = files.get(0);
 			if(!isImage(get))return false;
-			target.setImageIcon(convert(get));
+			target.setImageIcon(convert(get,target));
 			target.repaint();
 		} catch (Exception e) {
 			e.printStackTrace();

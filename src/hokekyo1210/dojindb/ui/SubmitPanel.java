@@ -23,11 +23,12 @@ import javax.swing.SwingUtilities;
 import javax.swing.border.EtchedBorder;
 
 import hokekyo1210.dojindb.crawler.Crawler;
+import hokekyo1210.dojindb.crawler.SearchResult;
 import hokekyo1210.dojindb.sql.Root;
 import hokekyo1210.dojindb.sql.SQLManager;
 import hokekyo1210.dojindb.ui.util.MyDropFileHandler;
 
-public class SubmitPanel extends JPanel implements ActionListener, MouseListener{
+public class SubmitPanel extends JPanel implements ActionListener, MouseListener,Runnable{
 	
 	private static final Color backGroundColor = new Color(212,230,247);
 	///private static final Color otherColor = new Color(232,255,247);
@@ -268,6 +269,13 @@ public class SubmitPanel extends JPanel implements ActionListener, MouseListener
 		}
 		this.repaint();
 	}
+	private void removeAllTag(){
+		for(TagLabel tag:tags){
+			this.remove(tag);
+		}
+		tags.clear();
+		this.repaint();
+	}
 	
 	@Override
 	public void mousePressed(MouseEvent event) {
@@ -313,6 +321,36 @@ public class SubmitPanel extends JPanel implements ActionListener, MouseListener
 		}
 	}
 	
+	public void showPopup(List<SearchResult> results){
+		SearchPopup popup = new SearchPopup(results,this);
+		popup.show(this, titleField.getX(), titleField.getY()+28);
+	}
+	public void setResult(SearchResult result){///遅いから全部非同期で適用
+		targetResult = result;
+		submitButton.setEnabled(false);///実行が完了するまで登録ボタンはオフ
+		Thread th = new Thread(this);
+		th.start();
+	}
+	private SearchResult targetResult;
+	
+	@Override
+	public void run() {
+		titleField.setText(targetResult.title);
+		circleField.setText(targetResult.circle);
+		artistField.setText(targetResult.artist);
+		year.setText(targetResult.year);
+		month.setText(targetResult.month);
+		day.setText(targetResult.day);
+		commentArea.setText("");
+		removeAllTag();///タグを全部外す
+		for(String tag:targetResult.tags){
+			addTag(tag);
+		}
+		imageArea.setImageIcon(targetResult.imageURL);
+		submitButton.setEnabled(true);
+		this.repaint();
+	}
+	
 	
 
 	@Override
@@ -323,5 +361,7 @@ public class SubmitPanel extends JPanel implements ActionListener, MouseListener
 	public void mouseExited(MouseEvent e) {}
 	@Override
 	public void mouseReleased(MouseEvent e) {}
+
+
 
 }

@@ -9,6 +9,9 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
+import hokekyo1210.dojindb.crawler.HtmlUtil;
+import hokekyo1210.dojindb.ui.util.MyDropFileHandler;
+
 public class MyImageLabel extends JLabel{
 	
 	private static final String DIR = System.getProperty("user.home")+"/temp/pic";///画像を保存するディレクトリ
@@ -36,6 +39,22 @@ public class MyImageLabel extends JLabel{
 	
 	public void setImageIcon(BufferedImage source){
 		this.source = source;
+		ImageIcon icon = new ImageIcon(source);
+		this.setIcon(icon);
+	}
+	public void setImageIcon(String url){
+		if(!(new File(DIR).exists())){
+			new File(DIR).mkdirs();
+		}
+		File to = new File(DIR+"/temp.png");
+		if(to.exists())to.delete();
+		try {
+			HtmlUtil.download(to, url);
+			this.source = MyDropFileHandler.convert(to, this);///大きさを変換する
+		} catch (Exception e) {
+			e.printStackTrace();
+			return;
+		}
 		ImageIcon icon = new ImageIcon(source);
 		this.setIcon(icon);
 	}
