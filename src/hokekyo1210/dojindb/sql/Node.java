@@ -50,5 +50,21 @@ public class Node extends DefaultMutableTreeNode{
 	public DefaultMutableTreeNode getTreeNode(){
 		return this;
 	}
+	
+	private static final Date none = new Date(0L);
+	public int compare(Node n1) {
+		int ret = this.circle.compareTo(n1.circle);///まずサークルで比較
+		if(ret == 0){///サークルが同じ場合は日付で比較
+			Date d0 = this.exDate;
+			Date d1 = n1.exDate;
+			if(d0 == null)d0 = none;
+			if(d1 == null)d1 = none;
+			ret = d1.compareTo(d0);
+			if(ret == 0){///日付も同じ場合はタイトル
+				ret = this.title.compareTo(n1.title);
+			}
+		}
+		return ret;
+	}
 
 }

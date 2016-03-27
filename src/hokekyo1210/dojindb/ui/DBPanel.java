@@ -102,7 +102,6 @@ public class DBPanel extends JPanel implements MouseListener{
 		List<Node> nodes = new ArrayList<Node>();///処理の順番を間違えるとDBがめんどくさいので一度選別
 		List<Root> roots = new ArrayList<Root>();
 		
-		DefaultMutableTreeNode last = null;
 		for(int i = 0;i < selection.size();i++){
 			DefaultMutableTreeNode node = selection.get(i);
 			DefaultMutableTreeNode parent = (DefaultMutableTreeNode) node.getParent();
@@ -118,13 +117,11 @@ public class DBPanel extends JPanel implements MouseListener{
 				r.removeCircle(c);
 				c.setDead(true);
 			}else if(node instanceof Root){
-				roots.add((Root) node);
-				((Root)node).setDead(true);
+				Root r = (Root)node;
+				roots.add(r);
+				r.setDead(true);
+				rootNode.remove(r);
 			}
-			if(parent != null){
-				parent.remove(node);
-			}
-			last = parent;
 		}
 		for(Node node : nodes){
 			SQLManager.removeNode(node);///あとは投げる
@@ -133,12 +130,7 @@ public class DBPanel extends JPanel implements MouseListener{
 			SQLManager.removeTable(r);///投げる
 		}
 		
-		if(selection.size() == 1){///1個なら更新を最小限に
-//			treeRefresh(last);
-			treeRefresh();
-		}else{
-			treeRefresh();
-		}
+		treeRefresh();
 	}
 	
 

@@ -82,15 +82,12 @@ public class SQLManager {
 					System.out.println(title+" "+circle+" "+artist+" "+date+" "+tag+"("+tags.size()+") "+comment+" "+image+" "+thumb);
 					Node node = new Node(title,circle,artist,date,tags,comment,image,thumb,r.getName());
 					stock.add(node);
-				}
-				Collections.sort(stock,new NodeComp());///データのソートを実行
-				for(Node n:stock){
-					Circle c = r.getCircle(n.circle);
-					if(c == null){///サークル未登録なら追加
-						c = new Circle(n.circle);
+					Circle c = r.getCircle(circle);
+					if(c == null){
+						c = new Circle(circle);
 						r.addCircle(c);
 					}
-					c.addNode(n);
+					c.addNode(node);
 				}
 			} catch (Exception e) {
 				e.printStackTrace();

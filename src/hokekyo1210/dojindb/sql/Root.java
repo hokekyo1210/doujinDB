@@ -8,40 +8,55 @@ import javax.swing.tree.DefaultMutableTreeNode;
 public class Root extends MyNode{
 	
 	private String name;
-	private HashMap<String,Circle> circles;///エッジが多くなることが予想されるので
-										   ///ArrayListは使わない
-//	private DefaultMutableTreeNode treeNode;
 	
 	public Root(String name){
 		super(name);
 		this.name = name;
-		circles = new HashMap<String,Circle>();
-//		treeNode = new DefaultMutableTreeNode(name);
 	}
 	
 	public DefaultMutableTreeNode getTreeNode(){
 		return this;
 	}
 	
-	public Collection<Circle> getCircles(){
+	/*public Collection<Circle> getCircles(){
 		return circles.values();
-	}
+	}*/
 	
 	public void addCircle(Circle circle){
-		circles.put(circle.getCircleName(), circle);
-		this.add(circle.getTreeNode());
+		boolean done = false;
+		for(int i = 0;i<this.getChildCount();i++){
+			if(circle.compare((Circle)this.getChildAt(i)) <= 0){
+				this.insert(circle, i);
+				done = true;
+				break;
+			}
+		}
+		if(!done)this.add(circle);///最後に入れる
 	}
 	
 	public void removeCircle(Circle circle){
-		circles.put(circle.getCircleName(), null);
+		for(int i = 0;i<this.getChildCount();i++){
+			if(this.getChildAt(i).equals(circle)){
+				this.remove(i);
+				break;
+			}
+		}
 	}
 	
 	public Circle getCircle(String key){
-		return circles.get(key);
+		for(int i = 0;i<this.getChildCount();i++){
+			Circle c = (Circle) this.getChildAt(i);
+			if(c.getCircleName().equals(key)){
+				return c;
+			}
+		}
+		return null;
 	}
 	
 	public void clearCirlces(){
-		circles.clear();
+		while(this.getChildCount() != 0){
+			this.remove(0);
+		}
 	}
 	
 	public String getName(){
