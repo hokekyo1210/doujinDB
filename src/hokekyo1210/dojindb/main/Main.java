@@ -37,7 +37,10 @@ public class Main {
 	}
 
 	public static void main(String[] args) {
+		long start = System.currentTimeMillis();
 		new Main();
+		long time = System.currentTimeMillis() - start;
+		System.out.println("Launch completed!["+time+"ms]");
 	}
 
 }

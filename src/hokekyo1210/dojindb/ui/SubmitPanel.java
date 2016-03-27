@@ -22,6 +22,7 @@ import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 import javax.swing.border.EtchedBorder;
 
+import hokekyo1210.dojindb.crawler.Crawler;
 import hokekyo1210.dojindb.sql.Root;
 import hokekyo1210.dojindb.sql.SQLManager;
 import hokekyo1210.dojindb.ui.util.MyDropFileHandler;
@@ -47,6 +48,8 @@ public class SubmitPanel extends JPanel implements ActionListener, MouseListener
 	
 	private JTextArea commentArea;
 	private JButton clearButton,submitButton;
+	
+	private static Crawler workingThread = null;
 	
 	public void submit(){///データベースに追加
 		String title = titleField.getText();
@@ -124,6 +127,7 @@ public class SubmitPanel extends JPanel implements ActionListener, MouseListener
 		titleField.setBounds(228, 30, 194, 28);
 		titleField.setFont(new Font("メイリオ", Font.PLAIN, 12));
 		titleField.setBackground(otherColor);
+		titleField.addActionListener(this);
 		this.add(titleLabel);
 		this.add(titleField);
 		
@@ -296,10 +300,20 @@ public class SubmitPanel extends JPanel implements ActionListener, MouseListener
 					source.repaint();
 				}
 			});
-		}else if(event.getSource().equals(tagField)){
+		}else if(event.getSource().equals(tagField)){///タグ入力してるときにエンター押したら追加
 			addButton.doClick();
+		}else if(event.getSource().equals(titleField)){
+			String word = titleField.getText();
+			if(word.length()<=1)return;///１文字以下だと検索してもあんま意味無い
+			if(workingThread != null){///検索中
+				workingThread.stop();
+			}
+			workingThread = new Crawler(word,this);
+			workingThread.start();///検索を実行する
 		}
 	}
+	
+	
 
 	@Override
 	public void mouseClicked(MouseEvent e) {}
