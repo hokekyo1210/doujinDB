@@ -312,7 +312,6 @@ public class SubmitPanel extends JPanel implements ActionListener, MouseListener
 			addButton.doClick();
 		}else if(event.getSource().equals(titleField)){
 			String word = titleField.getText();
-			if(word.length()<=1)return;///‚P•¶ŽšˆÈ‰º‚¾‚ÆŒŸõ‚µ‚Ä‚à‚ ‚ñ‚ÜˆÓ–¡–³‚¢
 			if(workingThread != null){///ŒŸõ’†
 				workingThread.stop();
 			}

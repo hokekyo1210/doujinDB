@@ -5,39 +5,43 @@ import java.util.List;
 
 public class SearchResult{
 	
-	public int id;
+	public String id;
 	public String title,circle;
 	public String year,month,day;
 	public String artist;
 	public List<String> tags;///とりあえずキャラクター
 	public String imageURL;
 	
-	public SearchResult(int id,String title,String circle){
+	public SearchResult(String id,String title,String circle){
 		this.id = id;
 		this.title = title;
 		this.circle = circle;
 	}
 	
 	public void secondSearch() throws Exception{///確定したらページを読み込む
-		String url = "http://www.doujinshi.org/book/"+(id)+"/?agree=force";
+		String url = "http://www.suruga-ya.jp/product/detail/"+id;
 		String ret = HtmlUtil.access(url).toString();
+		///System.out.println(ret);
 		
-		String date = ret.split("発行日:</B></td><td>")[1].split("</td>")[0];
-		String[] datesp = date.split("-");
-		year = datesp[0];
-		month = datesp[1];
-		day = datesp[2];
-		
-		artist = getArtist(ret);///アーティストとタグは存在しない可能性があるので丁寧に
-		tags = getTags(ret);
-		
-		imageURL = "http://img.doujinshi.org/big/"+ret.split("img.doujinshi.org/big/")[1].split("\" alt")[0];
-		System.out.println(imageURL);
-		System.out.println(artist);
-		System.out.println(date);
-		for(String c:tags){
-			System.out.println(c);
+		String date = ret.split("発売日: ")[1].split("<br>")[0];
+		if(!date.equalsIgnoreCase("")){
+			String[] datesp = date.split("/");
+			year = datesp[0];
+			month = datesp[1];
+			day = datesp[2];
 		}
+		
+		artist = "";
+		tags = new ArrayList<String>();
+		
+		imageURL = ret.split("\" zoom-photo-url=\"")[1].split("\" style=\"")[0];
+	
+		System.out.println(imageURL);
+//		System.out.println(artist);
+		System.out.println(date);
+		/*for(String c:tags){
+			System.out.println(c);
+		}*/
 	}
 
 	private List<String> getTags(String ret) {

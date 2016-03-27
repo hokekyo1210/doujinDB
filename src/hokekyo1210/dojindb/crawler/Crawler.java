@@ -41,17 +41,29 @@ public class Crawler implements Runnable{
 	private void fin(){
 		results.clear();
 		if(result.equalsIgnoreCase(""))return;
-		///System.out.println(result);
-		String[] split = result.split("href=\"/book/");
+//		System.out.println(result);
+		String[] split = result.split("\"onsale\">");
 		int hit = split.length - 1;
 		System.out.println("hit "+hit);
 		for(int i = 1 ; i < split.length ; i++){
 			String tar = split[i];
-			int id = Integer.parseInt(tar.split("/")[0]);
-			String[] spl2 = split[i].split("tab LPEXACT1\">");
-			String title = spl2[1].split("</span")[0];
-			String circle = spl2[3].split("</span")[0];
-			System.out.println(id+" "+title+" "+circle);
+			String id = tar.split("/product/detail/")[1].split("\">")[0];
+			String[] spl2 = split[i].split("\">");
+			String title = spl2[1].split("</a>")[0];
+			String circle = spl2[2].split("</span>")[0];
+			if(circle.equalsIgnoreCase(""))continue;///サークル部分が空なら省く
+			
+			circle = circle.substring(1);
+			circle = circle.split("]")[0];
+			if(title.lastIndexOf("&gt;") != -1){///ジャンルが含まれちゃってる
+				title = title.split("&gt; ")[1];
+			}else{
+				title = title.substring(1);
+			}
+			if(title.lastIndexOf(" / ") != -1){
+				title = title.split(" / ")[0];
+			}
+//			System.out.println(title+" "+circle+" "+id);
 			results.add(new SearchResult(id,title,circle));
 		}
 		if(results.size() != 0)
@@ -63,8 +75,6 @@ public class Crawler implements Runnable{
 		System.out.println("Crawler is running...");
 		long start = System.currentTimeMillis();
 		String[] split = searchWord.split(" ");
-		boolean simple = false;
-		if(split.length == 1)simple = true;///スペースで分割されてないワードならsimple
 		String url;
 		try {
 			url = URLEncoder.encode(searchWord, "UTF-8");///urlエンコード
@@ -72,11 +82,7 @@ public class Crawler implements Runnable{
 			e1.printStackTrace();
 			return;
 		}
-		if(simple){///高速な検索
-			url = "http://www.doujinshi.org/search/simple/?T=objects&sn="+url;
-		}else{///低速だけど高精度
-			url = "http://www.doujinshi.org/search/object/?Q=s&sn="+url+"&match=0&age=N";
-		}
+		url = "http://www.suruga-ya.jp/search?category=11&search_word="+url+"&grid=f&inStock=On&adult_s=1";
 		System.out.println("-----"+url+"-----");
 		result = "";
 		try {
