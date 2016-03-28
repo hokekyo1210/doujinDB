@@ -21,7 +21,7 @@ public class SearchResult{
 	public void secondSearch() throws Exception{///確定したらページを読み込む
 		String url = "http://www.suruga-ya.jp/product/detail/"+id;
 		String ret = HtmlUtil.access(url).toString();
-		///System.out.println(ret);
+		System.out.println(ret);
 		
 		String date = ret.split("発売日: ")[1].split("<br>")[0];
 		if(!date.equalsIgnoreCase("")){
@@ -31,13 +31,13 @@ public class SearchResult{
 			day = datesp[2];
 		}
 		
-		artist = "";
+		artist = getArtist(ret);
 		tags = new ArrayList<String>();
 		
 		imageURL = ret.split("\" zoom-photo-url=\"")[1].split("\" style=\"")[0];
 	
 		System.out.println(imageURL);
-//		System.out.println(artist);
+		System.out.println(artist);
 		System.out.println(date);
 		/*for(String c:tags){
 			System.out.println(c);
@@ -56,22 +56,10 @@ public class SearchResult{
 	}
 
 	private String getArtist(String ret) {
-		String[] split = ret.split("\">");
-		int i;
-		for(i = 0;i < split.length;i++){
-			String tar = split[i].split("<")[0];
-			if(tar.equals("著者:"))break;
-		}
-		i++;
-		if(i == split.length)return "";
 		String artret = "";
-		while(true){
-			String tar = split[i].split("<")[0];
-			if(!tar.equals(" "))break;
-			if(artret.length() != 0)artret += ",";
-			artret += split[i+1].split("<")[0];
-			i+=3;
-		}
+		String[] split = ret.split("画:<a");
+		if(split.length == 1)return artret;
+		artret = split[1].split("\">")[1].split("</a>")[0];
 		return artret;
 	}
 

@@ -312,9 +312,11 @@ public class SubmitPanel extends JPanel implements ActionListener, MouseListener
 			addButton.doClick();
 		}else if(event.getSource().equals(titleField)){
 			String word = titleField.getText();
+			if(word.equalsIgnoreCase(""))return;///空っぽなら動かさない
 			if(workingThread != null){///検索中
 				workingThread.stop();
 			}
+			titleField.setEnabled(false);///タイトルフィールドを止める
 			workingThread = new Crawler(word,this);
 			workingThread.start();///検索を実行する
 		}
@@ -323,6 +325,7 @@ public class SubmitPanel extends JPanel implements ActionListener, MouseListener
 	public void showPopup(List<SearchResult> results){
 		SearchPopup popup = new SearchPopup(results,this);
 		popup.show(this, titleField.getX(), titleField.getY()+28);
+		titleField.setEnabled(true);///戻す
 	}
 	public void setResult(SearchResult result){///遅いから全部非同期で適用
 		targetResult = result;
