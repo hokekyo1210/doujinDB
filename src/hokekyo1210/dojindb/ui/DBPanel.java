@@ -142,8 +142,9 @@ public class DBPanel extends JPanel implements MouseListener{
 		renderer.setOpenIcon(IconUtil.getIcon("folderopen.png"));
 		renderer.setClosedIcon(IconUtil.getIcon("folder.png"));
 		renderer.setLeafIcon(IconUtil.getIcon("file.png"));
-		renderer.setFont(new Font("メイリオ", Font.PLAIN, (int)Main.DIAMETER*12));
+		renderer.setFont(new Font("メイリオ", Font.PLAIN, (int)Main.DIAMETER*12+3));
 		jTree = new JTree(rootNode);
+		jTree.setRowHeight(34);
 		jTree.setCellRenderer(renderer);
 		jTree.setBackground(backGroundColor);
 		jTree.setRootVisible(false);

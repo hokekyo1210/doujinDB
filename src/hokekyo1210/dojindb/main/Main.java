@@ -12,7 +12,7 @@ public class Main {
 	
 	public static final String title = "doujinDB";
 	
-	public static final double DIAMETER = 2.0;
+	public static final double DIAMETER = 1.0;
 
 	private MainFrame frame;
 	public Main(){
