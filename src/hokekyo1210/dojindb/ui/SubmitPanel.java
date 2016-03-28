@@ -288,7 +288,7 @@ public class SubmitPanel extends JPanel implements ActionListener, MouseListener
 		if(event.getSource().equals(addButton)){
 			String target = tagField.getText();
 			if(target.equalsIgnoreCase(""))return;///‹ó•¶Žš‚È‚çƒ_ƒ
-			if(target.length()>1){
+			if(target.length()>0){
 				addTag(target);
 			}
 			tagField.setText("");
