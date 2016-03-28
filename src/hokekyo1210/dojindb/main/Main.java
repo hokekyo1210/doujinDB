@@ -11,6 +11,8 @@ import hokekyo1210.dojindb.ui.util.IconUtil;
 public class Main {
 	
 	public static final String title = "doujinDB";
+	
+	public static final double DIAMETER = 2.0;
 
 	private MainFrame frame;
 	public Main(){

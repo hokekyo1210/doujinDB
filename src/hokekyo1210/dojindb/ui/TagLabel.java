@@ -9,6 +9,8 @@ import javax.swing.border.LineBorder;
 
 import com.sun.xml.internal.ws.util.StringUtils;
 
+import hokekyo1210.dojindb.main.Main;
+
 public class TagLabel extends JLabel{
 	
 	/**
@@ -43,7 +45,7 @@ public class TagLabel extends JLabel{
 	}
 	
 	public void reloadBounds(int x,int y){
-		this.setBounds(x, y, length*width, 24);
+		this.setBounds(x, y, (int)Main.DIAMETER*length*width, (int)Main.DIAMETER*24);
 	}
 
 }
