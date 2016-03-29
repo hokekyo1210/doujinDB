@@ -19,11 +19,15 @@ public class MyImageLabel extends JLabel{
 	
 	private BufferedImage source = null;
 	
+	private String dir = "";
+	
 	public BufferedImage getSource(){
 		return source;
 	}
 	
 	public String save(){///‰æ‘œ‚ð•Û‘¶‚·‚é
+		if(!dir.equals(""))return dir;
+		
 		if(!(new File(DIR).exists())){
 			new File(DIR).mkdirs();
 		}
@@ -34,16 +38,18 @@ public class MyImageLabel extends JLabel{
 			e.printStackTrace();
 			return "None";
 		}
-		return ret;
+		return dir = ret;
 	}
 	
 	public void setImageIcon(BufferedImage source){
 		this.source = source;
 		ImageIcon icon = new ImageIcon(source);
 		this.setIcon(icon);
+		dir = "";
 	}
 	public void setImageIcon(File file) throws Exception{
 		setImageIcon(ImageIO.read(file));
+		dir = file.getAbsolutePath();
 	}
 	public void setImageIcon(String url){
 		if(!(new File(DIR).exists())){
@@ -60,6 +66,7 @@ public class MyImageLabel extends JLabel{
 		}
 		ImageIcon icon = new ImageIcon(source);
 		this.setIcon(icon);
+		dir = "";
 	}
 
 }
