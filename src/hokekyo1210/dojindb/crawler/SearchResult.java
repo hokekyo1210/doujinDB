@@ -21,7 +21,7 @@ public class SearchResult{
 	public void secondSearch() throws Exception{///確定したらページを読み込む
 		String url = "http://www.suruga-ya.jp/product/detail/"+id;
 		String ret = HtmlUtil.access(url).toString();
-		System.out.println(ret);
+//		System.out.println(ret);
 		
 		String date = ret.split("発売日: ")[1].split("<br>")[0];
 		if(!date.equalsIgnoreCase("")){

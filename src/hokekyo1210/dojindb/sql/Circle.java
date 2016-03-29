@@ -10,9 +10,6 @@ import javax.swing.tree.DefaultMutableTreeNode;
 public class Circle extends MyNode{
 	
 	private String circleName;
-	///private List<Node> nodes;
-	
-	///private DefaultMutableTreeNode treeNode;
 	
 	public Circle(String circleName){
 		super(circleName);

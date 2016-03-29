@@ -78,6 +78,14 @@ public class DBPanel extends JPanel implements MouseListener{
 				open.add(n);
 			}
 		}
+		for(int i = 0;i < rootNode.getChildCount();i++){///種別のところに作品数を出す
+			Root r = (Root) rootNode.getChildAt(i);
+			int num = 0;
+			for(int j = 0;j < r.getChildCount();j++){
+				num += ((Circle)r.getChildAt(j)).getNodeCount();
+			}
+			r.setUserObject(r.getName()+"("+num+")");
+		}
 		model.reload();
 		for(int r = 0;r < jTree.getRowCount();r++){
 			TreePath path = jTree.getPathForRow(r);
@@ -143,6 +151,7 @@ public class DBPanel extends JPanel implements MouseListener{
 		renderer.setLeafIcon(IconUtil.getIcon("file.png"));
 		renderer.setFont(new Font("メイリオ", Font.PLAIN, 12));
 		jTree = new JTree(rootNode);
+		jTree.setRowHeight(18);
 		jTree.setCellRenderer(renderer);
 		jTree.setBackground(backGroundColor);
 		jTree.setRootVisible(false);

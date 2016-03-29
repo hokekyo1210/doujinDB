@@ -127,8 +127,15 @@ public class SQLManager {
 	
 	public static void removeNode(Node node){///DBからNodeを消す
 		///DELETE FROM user WHERE title = '名前' AND circle = 'サークル'
+		String getQ = "SELECT * FROM '"+node.table+"' WHERE title = '"+node.title+"' AND circle = '"+node.circle+"'";
 		String query = "DELETE FROM '"+node.table+"' WHERE title = '"+node.title+"' AND circle = '"+node.circle+"'";
 		try {
+			ResultSet ret = query(getQ);
+			String dir = ret.getString("image");
+			if(!dir.equals("None")){///画像を削除する
+				File f = new File(dir);
+				f.delete();
+			}
 			query2(query);
 		} catch (Exception e) {
 			e.printStackTrace();
