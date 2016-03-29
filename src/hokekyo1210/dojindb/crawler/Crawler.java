@@ -85,14 +85,14 @@ public class Crawler implements Runnable{
 			e1.printStackTrace();
 			return;
 		}
-		url = "http://www.suruga-ya.jp/search?category=11&search_word="+url+"&grid=f&inStock=On&adult_s=1";
+		url = "http://www.suruga-ya.jp/search?category=11&search_word="+url+"&grid=f&inStock=On&adult_s=2";
 		url2 = "http://www.suruga-ya.jp/search?category=11&search_word="+url2+"&grid=f&inStock=On&adult_s=1&page=2";
 		System.out.println("-----"+url+"-----");
 		System.out.println("-----"+url2+"-----");
 		try {
-			StringBuffer response = HtmlUtil.access(url);///html‚ðŽæ“¾‚·‚é
+			StringBuffer response = HtmlUtil.access(url,"");///html‚ðŽæ“¾‚·‚é
 			result.add(response.toString());
-			response = HtmlUtil.access(url2);///html‚ðŽæ“¾‚·‚é
+			response = HtmlUtil.access(url2,"");///html‚ðŽæ“¾‚·‚é
 			result.add(response.toString());
 		} catch (Exception e) {
 			e.printStackTrace();

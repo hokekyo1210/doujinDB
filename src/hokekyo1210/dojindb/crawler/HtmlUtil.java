@@ -4,18 +4,27 @@ import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.CookieHandler;
 import java.net.HttpURLConnection;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
 
 public class HtmlUtil {
 	
-	public static StringBuffer access(String urls) throws Exception {
+	public static StringBuffer access(String urls,String cookie) throws Exception {
 		StringBuffer sb = new StringBuffer();
 		URL url = new URL(urls);
+		
 		HttpURLConnection uc = (HttpURLConnection) url.openConnection();
+		uc.setRequestProperty("Cookie", cookie);
 		
 		BufferedInputStream bis = new BufferedInputStream(uc.getInputStream());
 		BufferedReader br = new BufferedReader(new InputStreamReader(bis, "UTF-8"));
@@ -24,6 +33,26 @@ public class HtmlUtil {
 			sb.append(line.replaceAll("&amp;", "&") + "\n");
 		}
 		return sb;
+	}
+	
+	static String retrieveCookie(URL url) throws Exception 
+	{ 
+	     String cookieValue = null;
+
+	     CookieHandler handler = CookieHandler.getDefault();
+	     if (handler != null)    {
+	          Map<String, List<String>> headers = handler.get(url.toURI(), new HashMap<String, List<String>>() );
+	          List<String> values = headers.get("Cookie");
+	          for (Iterator<String> iter=values.iterator(); iter.hasNext();) {
+	               String v = iter.next(); 
+
+	               if (cookieValue == null) 
+	                    cookieValue = v; 
+	               else
+	                    cookieValue = cookieValue + ";" + v; 
+	          } 
+	     } 
+	     return cookieValue; 
 	}
 	
 	public static String download(File to,String urlStr) throws Exception{
