@@ -313,8 +313,10 @@ public class SubmitPanel extends JPanel implements ActionListener, MouseListener
 		}else if(event.getSource().equals(titleField)){
 			String word = titleField.getText();
 			if(word.equalsIgnoreCase(""))return;///空っぽなら動かさない
-			if(workingThread != null){///検索中
-				workingThread.stop();
+			
+			if(workingThread != null && !workingThread.isFinished()){
+				///検索中
+				return;
 			}
 			titleField.setEnabled(false);///タイトルフィールドを止める
 			workingThread = new Crawler(word,this);

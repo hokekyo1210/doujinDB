@@ -33,7 +33,7 @@ import hokekyo1210.dojindb.sql.Root;
 import hokekyo1210.dojindb.sql.SQLManager;
 import hokekyo1210.dojindb.ui.util.IconUtil;
 
-public class DBPanel extends JPanel implements MouseListener{
+public class DBPanel extends JPanel implements MouseListener , ActionListener{
 	
 	private static final int width = 190,height = 555;
 	private static final Color backGroundColor = new Color(212,230,247);
@@ -179,25 +179,63 @@ public class DBPanel extends JPanel implements MouseListener{
 	private void showPopup(int x,int y){///ポップアップを表示する
 		JPopupMenu menu = new JPopupMenu();
 		JMenuItem item = new JMenuItem("削除");
+		JMenuItem item2 = new JMenuItem("開く");
+		JMenuItem item3 = new JMenuItem("閉じる");
+		menu.add(item2);
+		menu.add(item3);
 		menu.add(item);
 		menu.show(jTree, x, y);
-		item.addActionListener(new ActionListener(){
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				if(jTree.getSelectionPaths() == null)return;
-				
-				List<DefaultMutableTreeNode> tar = new ArrayList<DefaultMutableTreeNode>();
-				for(TreePath path : jTree.getSelectionPaths()){///スタートノードは全部試す、あとは再帰
-					dfs((DefaultMutableTreeNode)path.getLastPathComponent(),tar);
-				}
-				
-				if(tar.size() == 0)return;
-				int ret = JOptionPane.showConfirmDialog(source, (tar.size())+"個の項目を削除しますがよろしいですか？","",JOptionPane.OK_CANCEL_OPTION);
-				if(ret == 0)
-					removeNode(tar);
+		item.addActionListener(this);
+		item2.addActionListener(this);
+		item3.addActionListener(this);
+	}
+	
+	@Override
+	public void actionPerformed(ActionEvent event) {
+		if(jTree.getSelectionPaths() == null)return;
+		
+		String key = ((JMenuItem)event.getSource()).getText();
+		if(key.equals("削除")){
+			
+			List<DefaultMutableTreeNode> tar = new ArrayList<DefaultMutableTreeNode>();
+			for(TreePath path : jTree.getSelectionPaths()){///スタートノードは全部試す、あとは再帰
+				dfs((DefaultMutableTreeNode)path.getLastPathComponent(),tar);
 			}
-		});
-
+			
+			if(tar.size() == 0)return;
+			int ret = JOptionPane.showConfirmDialog(source, (tar.size())+"個の項目を削除しますがよろしいですか？","",JOptionPane.OK_CANCEL_OPTION);
+			if(ret == 0)
+				removeNode(tar);
+			
+		}else if(key.equals("開く") || key.equals("閉じる")){
+			List<DefaultMutableTreeNode> tar = new ArrayList<DefaultMutableTreeNode>();
+			for(TreePath path : jTree.getSelectionPaths()){
+				DefaultMutableTreeNode node = (DefaultMutableTreeNode) path.getLastPathComponent();
+				if(node instanceof MyNode){
+					tar.add(node);
+				}
+			}
+			if(tar.size() == 0)return;
+			System.out.println("open or close :"+tar.size());
+			for(int i = 0;i < jTree.getRowCount();i++){
+				if(!tar.contains(jTree.getPathForRow(i).getLastPathComponent()))continue;
+				if(jTree.getPathForRow(i).getLastPathComponent() instanceof Circle){
+					if(key.equals("開く"))
+						jTree.expandRow(i);
+					if(key.equals("閉じる"))
+						jTree.collapseRow(i);
+				}
+			}
+			for(int i = 0;i < jTree.getRowCount();i++){
+				if(!tar.contains(jTree.getPathForRow(i).getLastPathComponent()))continue;
+				if(jTree.getPathForRow(i).getLastPathComponent() instanceof Root){
+					if(key.equals("開く"))
+						jTree.expandRow(i);
+					if(key.equals("閉じる"))
+						jTree.collapseRow(i);
+				}
+			}
+		}
 	}
 	
 	@Override

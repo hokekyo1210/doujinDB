@@ -17,7 +17,7 @@ public class Crawler implements Runnable{
 	private SubmitPanel source;
 	
 	private Thread myThread;
-	private boolean isDead = false;
+	private boolean isFinished = false;
 	private String searchWord;
 	private List<String> result = new ArrayList<String>();
 	private List<SearchResult> results = new ArrayList<SearchResult>();
@@ -31,11 +31,9 @@ public class Crawler implements Runnable{
 		myThread = new Thread(this);
 		myThread.start();
 	}
-	public void stop(){
-		isDead = true;
-	}
-	public boolean isDead(){
-		return isDead();
+	
+	public boolean isFinished(){
+		return isFinished;
 	}
 	
 	private void fin(){
@@ -101,7 +99,7 @@ public class Crawler implements Runnable{
 		
 		System.out.println("Crawler finished!["+time+"ms]");
 		fin();
-		stop();
+		isFinished = true;
 	}
 	
 
