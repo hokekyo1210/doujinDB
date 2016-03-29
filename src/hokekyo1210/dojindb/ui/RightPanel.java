@@ -4,6 +4,8 @@ import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 import javax.swing.border.BevelBorder;
 
+import hokekyo1210.dojindb.sql.Node;
+
 public class RightPanel extends JPanel{
 	
 	private static final int width = 430,height = 588;
@@ -22,6 +24,16 @@ public class RightPanel extends JPanel{
 			this.remove(currentView);///とりあえず今表示してるパネル消す
 		
 		SubmitPanel submitPanel = new SubmitPanel(RightPanel.width,RightPanel.height,this);
+		currentView = submitPanel;
+		this.add(submitPanel);
+		this.repaint();
+	}
+	
+	public void setModificationPanel(Node node){///修正用
+		if(currentView!=null)
+			this.remove(currentView);///とりあえず今表示してるパネル消す
+		
+		SubmitPanel submitPanel = new SubmitPanel(RightPanel.width,RightPanel.height,this,node);
 		currentView = submitPanel;
 		this.add(submitPanel);
 		this.repaint();

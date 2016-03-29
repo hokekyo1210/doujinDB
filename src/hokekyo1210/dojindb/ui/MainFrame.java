@@ -53,6 +53,10 @@ public class MainFrame extends JFrame implements ActionListener{
 		this.add(dbPanel);
 		this.add(rightPanel);
 	}
+	
+	public RightPanel getRightPanel(){
+		return rightPanel;
+	}
 
 	@Override
 	public void actionPerformed(ActionEvent event) {

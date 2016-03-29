@@ -42,6 +42,9 @@ public class MyImageLabel extends JLabel{
 		ImageIcon icon = new ImageIcon(source);
 		this.setIcon(icon);
 	}
+	public void setImageIcon(File file) throws Exception{
+		setImageIcon(ImageIO.read(file));
+	}
 	public void setImageIcon(String url){
 		if(!(new File(DIR).exists())){
 			new File(DIR).mkdirs();

@@ -106,7 +106,7 @@ public class DBPanel extends JPanel implements MouseListener , ActionListener{
 		treeRefresh();
 	}
 	
-	private void removeNode(List<DefaultMutableTreeNode> selection){
+	public static void removeNode(List<DefaultMutableTreeNode> selection,boolean refresh){
 		List<Node> nodes = new ArrayList<Node>();///処理の順番を間違えるとDBがめんどくさいので一度選別
 		List<Root> roots = new ArrayList<Root>();
 		
@@ -137,8 +137,14 @@ public class DBPanel extends JPanel implements MouseListener , ActionListener{
 		for(Root r : roots){
 			SQLManager.removeTable(r);///投げる
 		}
-		
-		treeRefresh();
+		if(refresh)
+			treeRefresh();
+	}
+	
+	public static void removeNode(Node node,boolean refresh){
+		List<DefaultMutableTreeNode> tmp = new ArrayList<DefaultMutableTreeNode>();
+		tmp.add(node);
+		removeNode(tmp,refresh);
 	}
 	
 
@@ -178,16 +184,19 @@ public class DBPanel extends JPanel implements MouseListener , ActionListener{
 	
 	private void showPopup(int x,int y){///ポップアップを表示する
 		JPopupMenu menu = new JPopupMenu();
-		JMenuItem item = new JMenuItem("削除");
 		JMenuItem item2 = new JMenuItem("開く");
 		JMenuItem item3 = new JMenuItem("閉じる");
+		JMenuItem item4 = new JMenuItem("修正");
+		JMenuItem item = new JMenuItem("削除");
 		menu.add(item2);
 		menu.add(item3);
+		menu.add(item4);
 		menu.add(item);
 		menu.show(jTree, x, y);
 		item.addActionListener(this);
 		item2.addActionListener(this);
 		item3.addActionListener(this);
+		item4.addActionListener(this);
 	}
 	
 	@Override
@@ -205,9 +214,10 @@ public class DBPanel extends JPanel implements MouseListener , ActionListener{
 			if(tar.size() == 0)return;
 			int ret = JOptionPane.showConfirmDialog(source, (tar.size())+"個の項目を削除しますがよろしいですか？","",JOptionPane.OK_CANCEL_OPTION);
 			if(ret == 0)
-				removeNode(tar);
+				removeNode(tar,true);
 			
 		}else if(key.equals("開く") || key.equals("閉じる")){
+			
 			List<DefaultMutableTreeNode> tar = new ArrayList<DefaultMutableTreeNode>();
 			for(TreePath path : jTree.getSelectionPaths()){
 				DefaultMutableTreeNode node = (DefaultMutableTreeNode) path.getLastPathComponent();
@@ -235,6 +245,11 @@ public class DBPanel extends JPanel implements MouseListener , ActionListener{
 						jTree.collapseRow(i);
 				}
 			}
+			
+		}else if(key.equals("修正")){
+			TreePath path = jTree.getSelectionPath();
+			if(!(path.getLastPathComponent() instanceof Node))return;
+			source.getRightPanel().setModificationPanel((Node)path.getLastPathComponent());
 		}
 	}
 	

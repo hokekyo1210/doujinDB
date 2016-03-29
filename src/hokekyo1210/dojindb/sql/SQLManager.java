@@ -78,7 +78,8 @@ public class SQLManager {
 					String comment = ret.getString("comment");
 					String image = ret.getString("image");
 					String thumb = ret.getString("thumb");
-					List<String> tags = Arrays.asList(tag.split("_"));
+					List<String> tags = new ArrayList<String>();
+					if(!tag.equals("None"))tags = Arrays.asList(tag.split("_"));
 					System.out.println(title+" "+circle+" "+artist+" "+date+" "+tag+"("+tags.size()+") "+comment+" "+image+" "+thumb);
 					Node node = new Node(title,circle,artist,date,tags,comment,image,thumb,r.getName());
 					stock.add(node);
@@ -188,10 +189,10 @@ public class SQLManager {
 		return false;
 	}
 	
-	public static boolean addData(String table,String title,String circle,String artist,String date,List<String> tags,String comment,String image,String thumb){
+	public static Node addData(String table,String title,String circle,String artist,String date,List<String> tags,String comment,String image,String thumb){
 		///INSERT INTO user VALUES(title,circle,artist,date,tag,comment,dir)
 		if(isExist(table,title,circle)){///データが重複してたらダメよ
-			return false;
+			return null;
 		}
 		String tag = "None";
 		if(tags.size() != 0){
@@ -206,10 +207,11 @@ public class SQLManager {
 			query2(query);
 		} catch (Exception e) {
 			e.printStackTrace();
-			return false;
+			return null;
 		}
-		addNode(table,new Node(title,circle,artist,date,tags,comment,image,thumb,table));///クエリ飛ばしたら木への追加も行う
-		return true;
+		Node newNode = new Node(title,circle,artist,date,tags,comment,image,thumb,table);
+		addNode(table,newNode);///クエリ飛ばしたら木への追加も行う
+		return newNode;
 	}
 
 }

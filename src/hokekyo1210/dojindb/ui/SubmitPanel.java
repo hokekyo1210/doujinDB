@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.File;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,6 +25,7 @@ import javax.swing.border.EtchedBorder;
 
 import hokekyo1210.dojindb.crawler.Crawler;
 import hokekyo1210.dojindb.crawler.SearchResult;
+import hokekyo1210.dojindb.sql.Node;
 import hokekyo1210.dojindb.sql.Root;
 import hokekyo1210.dojindb.sql.SQLManager;
 import hokekyo1210.dojindb.ui.util.MyDropFileHandler;
@@ -36,6 +38,8 @@ public class SubmitPanel extends JPanel implements ActionListener, MouseListener
 	
 	private RightPanel source;
 	private int panelWidth;
+	private boolean isModification;///修正かどうか
+	private Node beforeNode = null;
 	
 	private MyImageLabel imageArea;
 	private JTextField titleField,circleField,artistField;
@@ -52,7 +56,58 @@ public class SubmitPanel extends JPanel implements ActionListener, MouseListener
 	
 	private static Crawler workingThread = null;
 	
+	public SubmitPanel(int width,int height,RightPanel source){
+		this.panelWidth = width;
+		this.source = source;
+		this.isModification = false;
+		this.setBounds(2, 2, width-3, height-3);
+		this.setBackground(backGroundColor);
+		initPanel();
+		initComponents();
+		
+	}
+	
+	public SubmitPanel(int width,int height,RightPanel src,Node node){///修正用
+		this.panelWidth = width;
+		this.source = src;
+		this.isModification = true;
+		this.beforeNode = node;
+		this.setBounds(2, 2, width-3, height-3);
+		this.setBackground(backGroundColor);
+		initPanel();
+		initComponents();
+		titleField.setText(node.title);
+		circleField.setText(node.circle);
+		if(!node.artist.equals("None")){
+			artistField.setText(node.artist);
+		}
+		String[] date = node.date.split("-");
+		if(date.length == 3){
+			year.setText(date[0]);
+			month.setText(date[1]);
+			day.setText(date[2]);
+		}
+		kindBox.setSelectedItem(node.table);
+		if(!node.comment.equals("None")){
+			commentArea.setText(node.comment);
+		}
+		for(String t:node.tags){
+			addTag(t);
+		}
+		if(!node.image.equals("None")){
+			try {
+				imageArea.setImageIcon(new File(node.image));
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+
+	}
+	
 	public void submit(){///データベースに追加
+		if(isModification){///修正用なら前のdbを削除
+			DBPanel.removeNode(beforeNode,false);
+		}
 		String title = titleField.getText();
 		String circle = circleField.getText();
 		String artist = "None";
@@ -80,23 +135,14 @@ public class SubmitPanel extends JPanel implements ActionListener, MouseListener
 		if(imageArea.getSource() != null){///画像を別の場所に生成
 			image = imageArea.save();
 		}
-		boolean result = SQLManager.addData((String)kindBox.getSelectedItem(), title, circle, artist, date, tagArray, comment, image,thumb);
-		if(result){
+		Node result = SQLManager.addData((String)kindBox.getSelectedItem(), title, circle, artist, date, tagArray, comment, image,thumb);
+		if(result != null){
 			submitButton.setForeground(Color.GREEN);
 		}else{
 			submitButton.setForeground(Color.RED);
 		}
+		beforeNode = result;
 		///source.setSubmitPanel();///submitパネルをリロード!
-	}
-	
-	public SubmitPanel(int width,int height,RightPanel source){
-		this.panelWidth = width;
-		this.source = source;
-		this.setBounds(2, 2, width-3, height-3);
-		this.setBackground(backGroundColor);
-		initPanel();
-		initComponents();
-		
 	}
 
 	private void initPanel(){
@@ -224,7 +270,11 @@ public class SubmitPanel extends JPanel implements ActionListener, MouseListener
 		clearButton.setBounds(250, 552, 80, 30);
 		clearButton.addActionListener(this);
 		
-		submitButton = new JButton("登録");
+		if(!isModification){
+			submitButton = new JButton("登録");
+		}else{
+			submitButton = new JButton("修正");
+		}
 		submitButton.setFont(new Font("メイリオ", Font.PLAIN, 14));
 		submitButton.setBounds(340, 552, 80, 30);
 		submitButton.addActionListener(this);
@@ -232,8 +282,14 @@ public class SubmitPanel extends JPanel implements ActionListener, MouseListener
 		this.add(submitButton);
 		this.add(clearButton);
 		
-		commentArea.revalidate();///これやらないとなぜか微妙な動作
-		kindBox.revalidate();
+		SwingUtilities.invokeLater(new Runnable(){
+			public void run(){
+				commentArea.revalidate();///これやらないとなぜか微妙な動作
+				kindBox.revalidate();
+			}
+		});
+		
+
 	}
 
 	private void addTag(String tag){

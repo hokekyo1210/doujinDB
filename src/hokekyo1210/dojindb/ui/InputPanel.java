@@ -6,18 +6,21 @@ import java.awt.Font;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.LineBorder;
 
 import hokekyo1210.dojindb.sql.SQLManager;
 import hokekyo1210.dojindb.ui.util.IconUtil;
 
-public class InputPanel extends JPanel implements ActionListener{
+public class InputPanel extends JPanel implements ActionListener, MouseListener{
 	
 	private static final int width = 191,height = 32;
 	
@@ -47,6 +50,7 @@ public class InputPanel extends JPanel implements ActionListener{
 		
 		JLabel subBtn = new JLabel(IconUtil.getIcon("edit32.png"));
 		subBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		subBtn.addMouseListener(this);
 		subBtn.setBounds(159, 2, 30,30);
 		subBtn.setBorder(new LineBorder(Color.black, 1, false));
 		this.add(subBtn);
@@ -59,9 +63,40 @@ public class InputPanel extends JPanel implements ActionListener{
 		SQLManager.addNewTable(tableName);
 		inputField.setText("");
 	}
+	
+	@Override
+	public void mousePressed(MouseEvent event) {
+		if(!SwingUtilities.isLeftMouseButton(event))return;
+		source.getRightPanel().setSubmitPanel();
+	}
 
 	private void initPanel() {
 		this.setLayout(null);
+	}
+	
+	@Override
+	public void mouseClicked(MouseEvent event) {
+
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
 	}
 
 
