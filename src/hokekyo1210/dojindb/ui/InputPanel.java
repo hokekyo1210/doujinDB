@@ -17,6 +17,7 @@ import javax.swing.SwingUtilities;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.LineBorder;
 
+import hokekyo1210.dojindb.main.Main;
 import hokekyo1210.dojindb.sql.SQLManager;
 import hokekyo1210.dojindb.ui.util.IconUtil;
 
@@ -30,28 +31,28 @@ public class InputPanel extends JPanel implements ActionListener, MouseListener{
 	
 	public InputPanel(int x,int y,MainFrame source){
 		this.source = source;
-		this.setBounds(x, y, InputPanel.width, InputPanel.height);
+		this.setBounds(x, y, (int)Main.DIAMETER*InputPanel.width, (int)Main.DIAMETER*InputPanel.height);
 		initPanel();
 		initComponents();
 	}
 
 	private void initComponents() {
 		inputField = new JTextField();
-		inputField.setBounds(1, 1, 132, 32);
-		inputField.setFont(new Font("メイリオ", Font.PLAIN, 14));
+		inputField.setBounds(1, 1, (int)Main.DIAMETER*132, (int)Main.DIAMETER*32);
+		inputField.setFont(new Font("メイリオ", Font.PLAIN, (int)Main.DIAMETER*14));
 		this.add(inputField);
 		
 		JButton addBtn = new JButton("+");
-		addBtn.setFont(new Font("メイリオ", Font.PLAIN, 18));
+		addBtn.setFont(new Font("メイリオ", Font.PLAIN, (int)Main.DIAMETER*18));
 		addBtn.setMargin(new Insets(0,0,0,0));
-		addBtn.setBounds(132, 1, 24, 31);
+		addBtn.setBounds((int)Main.DIAMETER*132, 1, (int)Main.DIAMETER*24, (int)Main.DIAMETER*31);
 		addBtn.addActionListener(this);
 		this.add(addBtn);
 		
 		JLabel subBtn = new JLabel(IconUtil.getIcon("edit32.png"));
 		subBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		subBtn.addMouseListener(this);
-		subBtn.setBounds(159, 2, 30,30);
+		subBtn.setBounds((int)Main.DIAMETER*159, 2, (int)Main.DIAMETER*30,(int)Main.DIAMETER*30);
 		subBtn.setBorder(new LineBorder(Color.black, 1, false));
 		this.add(subBtn);
 	}
