@@ -13,6 +13,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.TransferHandler;
 
+import hokekyo1210.dojindb.main.Main;
 import hokekyo1210.dojindb.ui.MyImageLabel;
 
 public class MyDropFileHandler extends TransferHandler{
@@ -38,21 +39,21 @@ public class MyDropFileHandler extends TransferHandler{
 		int tarWidth,tarHeight;///–Ú•W‚Æ‚·‚éƒTƒCƒY
 		double resizePer;///k¬(Šg‘å)—¦
 		if(fheight > fwidth){///c’·‚Ì‰æ‘œ
-			tarHeight = 300;
+			tarHeight = (int)Main.DIAMETER*300;
 			resizePer = (double)tarHeight/fheight*1.0;
 			tarWidth = (int) (fwidth*resizePer);
 			
 			target.setHorizontalAlignment(JLabel.CENTER);
 			target.setVerticalAlignment(JLabel.TOP);
 		}else{
-			tarWidth = 220;
+			tarWidth = (int)Main.DIAMETER*220;
 			resizePer = (double)tarWidth/fwidth*1.0;
 			tarHeight = (int) (fheight*resizePer);
 			target.setHorizontalAlignment(JLabel.CENTER);
 			target.setVerticalAlignment(JLabel.CENTER);
 		}
-		if(tarWidth>222){///‚Í‚Ý‚¾‚µ‚¿‚á‚Á‚Ä‚é
-			tarWidth = 220;
+		if(tarWidth>(int)Main.DIAMETER*222){///‚Í‚Ý‚¾‚µ‚¿‚á‚Á‚Ä‚é
+			tarWidth = (int)Main.DIAMETER*220;
 			resizePer = (double)tarWidth/fwidth*1.0;
 			tarHeight = (int) (fheight*resizePer);
 			target.setHorizontalAlignment(JLabel.CENTER);
