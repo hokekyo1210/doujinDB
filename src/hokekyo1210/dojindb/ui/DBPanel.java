@@ -6,10 +6,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import javax.swing.ImageIcon;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -26,16 +28,19 @@ import javax.swing.tree.MutableTreeNode;
 import javax.swing.tree.TreeNode;
 import javax.swing.tree.TreePath;
 
+import hokekyo1210.dojindb.main.Main;
 import hokekyo1210.dojindb.sql.Circle;
 import hokekyo1210.dojindb.sql.MyNode;
 import hokekyo1210.dojindb.sql.Node;
 import hokekyo1210.dojindb.sql.Root;
 import hokekyo1210.dojindb.sql.SQLManager;
+import hokekyo1210.dojindb.ui.util.IconTreeCellRenderer;
 import hokekyo1210.dojindb.ui.util.IconUtil;
+import hokekyo1210.dojindb.ui.util.MyDropFileHandler;
 
 public class DBPanel extends JPanel implements MouseListener , ActionListener{
 	
-	private static final int width = 190,height = 555;
+	private static final int width = 220,height = 555;
 	private static final Color backGroundColor = new Color(212,230,247);
 	private static final Color otherColor = new Color(246,255,247);
 	
@@ -150,14 +155,11 @@ public class DBPanel extends JPanel implements MouseListener , ActionListener{
 
 
 	private void initComponent() {
-		DefaultTreeCellRenderer renderer = new DefaultTreeCellRenderer();
-		renderer.setBackgroundNonSelectionColor(backGroundColor);
-		renderer.setOpenIcon(IconUtil.getIcon("folderopen.png"));
-		renderer.setClosedIcon(IconUtil.getIcon("folder.png"));
-		renderer.setLeafIcon(IconUtil.getIcon("file.png"));
+		IconTreeCellRenderer renderer = new IconTreeCellRenderer();
 		renderer.setFont(new Font("メイリオ", Font.PLAIN, 12));
+		renderer.setBigFont(new Font("メイリオ", Font.BOLD, 12));
 		jTree = new JTree(rootNode);
-		jTree.setRowHeight(18);
+		jTree.setRowHeight(Main.TreeRowHeight);
 		jTree.setCellRenderer(renderer);
 		jTree.setBackground(backGroundColor);
 		jTree.setRootVisible(false);
@@ -182,17 +184,22 @@ public class DBPanel extends JPanel implements MouseListener , ActionListener{
 		}
 	}
 	
-	private void showPopup(int x,int y){///ポップアップを表示する
+	private void showPopup(int x,int y,boolean folder){///ポップアップを表示する
 		JPopupMenu menu = new JPopupMenu();
+		JMenuItem item5 = new JMenuItem("表示");
 		JMenuItem item2 = new JMenuItem("開く");
 		JMenuItem item3 = new JMenuItem("閉じる");
 		JMenuItem item4 = new JMenuItem("修正");
 		JMenuItem item = new JMenuItem("削除");
-		menu.add(item2);
-		menu.add(item3);
+		menu.add(item5);
+		if(folder){
+			menu.add(item2);
+			menu.add(item3);
+		}
 		menu.add(item4);
 		menu.add(item);
 		menu.show(jTree, x, y);
+		item5.addActionListener(this);
 		item.addActionListener(this);
 		item2.addActionListener(this);
 		item3.addActionListener(this);
@@ -258,10 +265,13 @@ public class DBPanel extends JPanel implements MouseListener , ActionListener{
 		if(!SwingUtilities.isRightMouseButton(event))return;
 		int tarRow = jTree.getRowForLocation(event.getX(), event.getY());
 		if(tarRow == -1)return;
+		boolean folder = true;
 		if(jTree.getSelectionPaths() == null||jTree.getSelectionPaths().length == 1){
 			jTree.setSelectionRow(tarRow);///右クリックした場所を選択させる
+			if(jTree.getSelectionPath().getLastPathComponent() instanceof Node)
+				folder = false;
 		}
-		showPopup(event.getX(),event.getY());
+		showPopup(event.getX(),event.getY(),folder);
 	}
 
 	private void initPanel() {

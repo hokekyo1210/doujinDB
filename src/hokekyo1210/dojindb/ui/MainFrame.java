@@ -1,18 +1,26 @@
 package hokekyo1210.dojindb.ui;
 
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
+import java.awt.event.ComponentListener;
 
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.SwingUtilities;
+
 
 public class MainFrame extends JFrame implements ActionListener{
 	
-	private static final int width = 630,
-							height = 638;
+	private static final int width = 660,///630
+							height = 636;
 	
+	private MainFrame own;
 	private String title;
 	
 	private InputPanel inputPanel;
@@ -20,6 +28,7 @@ public class MainFrame extends JFrame implements ActionListener{
 	private RightPanel rightPanel;
 	
 	public MainFrame(String title){
+		this.own = this;
 		this.title = title;
 		initFrame();
 		initComponents();
@@ -33,6 +42,8 @@ public class MainFrame extends JFrame implements ActionListener{
 		this.setSize(MainFrame.width, MainFrame.height);
 		this.setResizable(false);
 		this.setLocationRelativeTo(null);///‰æ–Ê‚Ì’†‰›‚ÉˆÚ“®
+		
+		
 	}
 	
 	private void initComponents(){
@@ -48,7 +59,7 @@ public class MainFrame extends JFrame implements ActionListener{
 		
 		inputPanel = new InputPanel(0,0,this);
 		dbPanel = new DBPanel(1,34,this);
-		rightPanel = new RightPanel(192,0);
+		rightPanel = new RightPanel(222,0);
 		this.add(inputPanel);
 		this.add(dbPanel);
 		this.add(rightPanel);

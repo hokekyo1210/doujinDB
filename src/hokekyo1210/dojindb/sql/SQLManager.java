@@ -61,12 +61,13 @@ public class SQLManager {
 	
 	public static boolean databaseAllReload(){///全データをリロード,木を再構築
 		long start = System.currentTimeMillis();
+		List<Node> stock = new ArrayList<Node>();///ミニ画像ロード用に溜める
 		for(Root r:tables){
 			r.clearCirlces();///まずテーブル内のサークルをクリアする
 			String tableName = r.getName();
 			System.out.println("----------"+tableName+"----------");
 			String selquery = "SELECT * FROM "+tableName;
-			List<Node> stock = new ArrayList<Node>();///ソート用に溜める
+			
 			try {
 				ResultSet ret = query(selquery);
 				while(ret.next()){
@@ -81,7 +82,7 @@ public class SQLManager {
 					List<String> tags = new ArrayList<String>();
 					if(!tag.equals("None"))tags = Arrays.asList(tag.split("_"));
 					System.out.println(title+" "+circle+" "+artist+" "+date+" "+tag+"("+tags.size()+") "+comment+" "+image+" "+thumb);
-					Node node = new Node(title,circle,artist,date,tags,comment,image,thumb,r.getName());
+					Node node = new Node(title,circle,artist,date,tags,comment,image,thumb,r.getName(),false);
 					stock.add(node);
 					Circle c = r.getCircle(circle);
 					if(c == null){
@@ -95,6 +96,8 @@ public class SQLManager {
 				return false;
 			}
 		}
+		Thread th = new Thread(new MiniImageLoader(stock));///画像を非同期でロードさせる
+		th.start();
 		System.out.println("Load success.["+(System.currentTimeMillis()-start)+"ms]");
 		
 		return true;
@@ -209,7 +212,7 @@ public class SQLManager {
 			e.printStackTrace();
 			return null;
 		}
-		Node newNode = new Node(title,circle,artist,date,tags,comment,image,thumb,table);
+		Node newNode = new Node(title,circle,artist,date,tags,comment,image,thumb,table,true);
 		addNode(table,newNode);///クエリ飛ばしたら木への追加も行う
 		return newNode;
 	}
