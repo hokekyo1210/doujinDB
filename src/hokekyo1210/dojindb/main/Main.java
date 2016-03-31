@@ -12,7 +12,8 @@ public class Main {
 	
 	public static final String title = "doujinDB";
 	
-	public static final int TreeRowHeight = 24;
+	public static final int TreeRowHeight = 30;
+	public static final int TreeTxtHeight = 18;
 
 	private MainFrame frame;
 	public Main(){

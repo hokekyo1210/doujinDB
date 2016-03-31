@@ -159,7 +159,8 @@ public class DBPanel extends JPanel implements MouseListener , ActionListener{
 		renderer.setFont(new Font("メイリオ", Font.PLAIN, 12));
 		renderer.setBigFont(new Font("メイリオ", Font.BOLD, 12));
 		jTree = new JTree(rootNode);
-		jTree.setRowHeight(Main.TreeRowHeight);
+//		jTree.setRowHeight(Main.TreeRowHeight);
+		jTree.setRowHeight(0);
 		jTree.setCellRenderer(renderer);
 		jTree.setBackground(backGroundColor);
 		jTree.setRootVisible(false);
