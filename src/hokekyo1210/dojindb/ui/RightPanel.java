@@ -1,6 +1,10 @@
 package hokekyo1210.dojindb.ui;
 
+import java.util.List;
+
+import javax.swing.JComponent;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.SwingUtilities;
 import javax.swing.border.BevelBorder;
 
@@ -8,9 +12,9 @@ import hokekyo1210.dojindb.sql.Node;
 
 public class RightPanel extends JPanel{
 	
-	private static final int width = 430,height = 588;
+	private static final int width = 430,height = 590;
 	
-	private JPanel currentView = null;
+	private JComponent currentView = null;
 	
 	public RightPanel(int x,int y){
 		this.setLayout(null);
@@ -19,13 +23,23 @@ public class RightPanel extends JPanel{
 		setSubmitPanel();///最初はサブミットパネル出す
 	}
 	
+	public void setBrowsePanel(List<Node> views){
+		if(currentView!=null)
+			this.remove(currentView);///とりあえず今表示してるパネル消す
+		
+		BrowsePanel browsePanel = new BrowsePanel(RightPanel.width,RightPanel.height,this,views);
+		currentView = browsePanel;
+		this.add(currentView);
+		this.repaint();
+	}
+	
 	public void setSubmitPanel(){
 		if(currentView!=null)
 			this.remove(currentView);///とりあえず今表示してるパネル消す
 		
 		SubmitPanel submitPanel = new SubmitPanel(RightPanel.width,RightPanel.height,this);
 		currentView = submitPanel;
-		this.add(submitPanel);
+		this.add(currentView);
 		this.repaint();
 	}
 	
@@ -35,7 +49,7 @@ public class RightPanel extends JPanel{
 		
 		SubmitPanel submitPanel = new SubmitPanel(RightPanel.width,RightPanel.height,this,node);
 		currentView = submitPanel;
-		this.add(submitPanel);
+		this.add(currentView);
 		this.repaint();
 	}
 	

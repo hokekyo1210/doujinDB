@@ -12,13 +12,15 @@ public class Main {
 	
 	public static final String title = "doujinDB";
 	
-	public static final int TreeRowHeight = 30;
+	public static final int TreeRowHeight = 30;///ツリーのサムネに使う大きさ
 	public static final int TreeTxtHeight = 18;
+	public static final int thumbnailWidth = 80;///ブラウジングに使うサムネの大きさ
+	public static final int thumbnailHeight = 110;
 
 	private MainFrame frame;
 	public Main(){
 		try {
-			UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
+			///UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
 		} catch (Exception e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();

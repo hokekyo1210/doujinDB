@@ -12,7 +12,7 @@ public class MiniImageLoader implements Runnable{
 
 	@Override
 	public void run() {
-		for(Node node:target)node.loadMiniImage();
+		for(Node node:target)node.loadImage();
 	}
 
 }

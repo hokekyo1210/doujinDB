@@ -175,16 +175,6 @@ public class DBPanel extends JPanel implements MouseListener , ActionListener{
 		this.add(scroll);
 	}
 	
-	private void dfs(DefaultMutableTreeNode now,List<DefaultMutableTreeNode> set){///再帰的に削除すべきノードを探す
-		if(!set.contains(now)){
-			set.add(now);
-		}
-		for(int i = 0;i < now.getChildCount();i++){
-			DefaultMutableTreeNode next = (DefaultMutableTreeNode) now.getChildAt(i);
-			dfs(next,set);
-		}
-	}
-	
 	private void showPopup(int x,int y,boolean folder){///ポップアップを表示する
 		JPopupMenu menu = new JPopupMenu();
 		JMenuItem item5 = new JMenuItem("表示");
@@ -206,6 +196,28 @@ public class DBPanel extends JPanel implements MouseListener , ActionListener{
 		item3.addActionListener(this);
 		item4.addActionListener(this);
 	}
+	
+	private void dfs(DefaultMutableTreeNode now,List<DefaultMutableTreeNode> set){///再帰的に削除すべきノードを探す
+		if(!set.contains(now)){
+			set.add(now);
+		}
+		for(int i = 0;i < now.getChildCount();i++){
+			DefaultMutableTreeNode next = (DefaultMutableTreeNode) now.getChildAt(i);
+			dfs(next,set);
+		}
+	}
+	
+	private void dfsNode(DefaultMutableTreeNode now,List<Node> set){///再帰的に表示すべきノードを探す
+		if(now instanceof Node && !set.contains(now)){
+			set.add((Node)now);
+		}
+		for(int i = 0;i < now.getChildCount();i++){
+			DefaultMutableTreeNode next = (DefaultMutableTreeNode) now.getChildAt(i);
+			dfsNode(next,set);
+		}
+	}
+	
+
 	
 	@Override
 	public void actionPerformed(ActionEvent event) {
@@ -255,9 +267,22 @@ public class DBPanel extends JPanel implements MouseListener , ActionListener{
 			}
 			
 		}else if(key.equals("修正")){
+			
 			TreePath path = jTree.getSelectionPath();
 			if(!(path.getLastPathComponent() instanceof Node))return;
 			source.getRightPanel().setModificationPanel((Node)path.getLastPathComponent());
+			
+		}else if(key.equals("表示")){
+			
+			List<Node> views = new ArrayList<Node>();///表示させるノード
+			TreePath[] paths = jTree.getSelectionPaths();
+			for(TreePath path:paths){
+				dfsNode((DefaultMutableTreeNode) path.getLastPathComponent(),views);///ノードを再帰的に探索する
+			}
+			if(views.size() == 0)return;
+			source.getRightPanel().setBrowsePanel(views);
+			System.out.println("views "+views.size());
+			
 		}
 	}
 	

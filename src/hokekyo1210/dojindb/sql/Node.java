@@ -7,6 +7,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import javax.swing.tree.DefaultMutableTreeNode;
 
 import hokekyo1210.dojindb.main.Main;
@@ -22,7 +23,10 @@ public class Node extends DefaultMutableTreeNode{
 	public String comment;
 	public String image;
 	public String thumb;
+	public ImageIcon bigImage;
 	public ImageIcon miniImage;
+	public ImageIcon thumbnail;
+	public JLabel thumbnailLabel;
 	
 	public String table;
 	
@@ -51,16 +55,32 @@ public class Node extends DefaultMutableTreeNode{
 			}
 		}
 		if(imageLoad)
-			loadMiniImage();
+			loadImage();
 	}
 	
-	public void loadMiniImage(){
-		if(!image.equals("None")){
-			try {
+	public synchronized void loadImage() {
+		if(image.equals("None"))return;
+		try {
+			if(miniImage == null){
 				this.miniImage = new ImageIcon(MyDropFileHandler.convert(new File(image), null, Main.TreeRowHeight, Main.TreeRowHeight));
-			} catch (Exception e) {
-				e.printStackTrace();
 			}
+			if(thumbnailLabel == null){
+				thumbnailLabel = new JLabel();
+				this.thumbnail = new ImageIcon(MyDropFileHandler.convert(new File(image), thumbnailLabel, Main.thumbnailWidth, Main.thumbnailHeight));
+				thumbnailLabel.setIcon(thumbnail);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void loadBigImage(){
+		if(image.equals("None"))return;
+		if(bigImage != null)return;
+		try{
+			bigImage = new ImageIcon(MyDropFileHandler.convert(new File(image), null));
+		}catch(Exception e){
+			e.printStackTrace();
 		}
 	}
 	

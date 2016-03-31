@@ -31,11 +31,11 @@ public class MyDropFileHandler extends TransferHandler{
 		return false;
 	}
 	
-	public static BufferedImage convert(File file,MyImageLabel target) throws Exception{
+	public static BufferedImage convert(File file,JLabel target) throws Exception{
 		return convert(file,target,220,300);
 	}
 	
-	public static BufferedImage convert(File file,MyImageLabel target,int width,int height) throws Exception{///‰æ‘œ‚ðwidth*height‚É‡‚í‚¹‚é
+	public static BufferedImage convert(File file,JLabel target,int width,int height) throws Exception{///‰æ‘œ‚ðwidth*height‚É‡‚í‚¹‚é
 		BufferedImage source = ImageIO.read(file);
 		int fwidth = source.getWidth();
 		int fheight = source.getHeight();
@@ -45,33 +45,23 @@ public class MyDropFileHandler extends TransferHandler{
 			tarHeight = height;
 			resizePer = (double)tarHeight/fheight*1.0;
 			tarWidth = (int) (fwidth*resizePer);
-			
-			if(target != null){
-				target.setHorizontalAlignment(JLabel.CENTER);
-				target.setVerticalAlignment(JLabel.TOP);
-			}
 		}else{
 			tarWidth = width;
 			resizePer = (double)tarWidth/fwidth*1.0;
 			tarHeight = (int) (fheight*resizePer);
-			if(target != null){
-				target.setHorizontalAlignment(JLabel.CENTER);
-				target.setVerticalAlignment(JLabel.CENTER);
-			}
 		}
 		if(tarWidth>width+2){///‚Í‚Ý‚¾‚µ‚¿‚á‚Á‚Ä‚é
 			tarWidth = width;
 			resizePer = (double)tarWidth/fwidth*1.0;
 			tarHeight = (int) (fheight*resizePer);
-			if(target != null){
-				target.setHorizontalAlignment(JLabel.CENTER);
-				target.setVerticalAlignment(JLabel.CENTER);
-			}
 		}
 		BufferedImage ret = new BufferedImage(tarWidth, tarHeight, source.getType());
 		ret.getGraphics()
 		.drawImage(source.getScaledInstance(tarWidth, tarHeight, Image.SCALE_AREA_AVERAGING), 0, 0, tarWidth, tarHeight, null);
-		
+		if(target != null){
+			target.setHorizontalAlignment(JLabel.CENTER);
+			target.setVerticalAlignment(JLabel.CENTER);
+		}
 		return ret;
 	}
 	
