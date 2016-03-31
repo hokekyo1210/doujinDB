@@ -15,16 +15,17 @@ public class TagLabel extends JLabel{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	public static final int width = 7;
+	public static final int height = 24
+			;
 	private static final Color backGround = Color.WHITE;
 	private static final Color otherColor = new Color(246,255,247);
 	
 	private String tag;
-	private int length;
+	private int pwidth;
 	
 	public TagLabel(String tag){
 		this.tag = tag;
-		this.length = tag.getBytes(Charset.forName("Shift_JIS")).length;
+		
 		this.setBorder(new LineBorder(Color.black, 1, true));
 		this.setBackground(otherColor);
 		this.setOpaque(true);
@@ -32,10 +33,11 @@ public class TagLabel extends JLabel{
 		this.setVerticalAlignment(JLabel.CENTER);
 		this.setText(tag);
 		this.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		this.pwidth = this.getPreferredSize().width + 6;
 	}
 	
-	public int getLength(){
-		return length;
+	public int getWidth(){
+		return pwidth;
 	}
 	
 	public String getTag(){
@@ -43,7 +45,7 @@ public class TagLabel extends JLabel{
 	}
 	
 	public void reloadBounds(int x,int y){
-		this.setBounds(x, y, length*width, 24);
+		this.setBounds(x, y, pwidth, height);
 	}
 
 }

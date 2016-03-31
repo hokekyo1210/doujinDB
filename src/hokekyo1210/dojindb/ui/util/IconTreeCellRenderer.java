@@ -11,6 +11,7 @@ import java.util.HashMap;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JTree;
+import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeCellRenderer;
 import javax.swing.tree.TreeCellRenderer;
 
@@ -20,7 +21,10 @@ import hokekyo1210.dojindb.sql.Root;
 
 public class IconTreeCellRenderer implements TreeCellRenderer{
 	
+	private static final int width = 8;
+	
 	private DefaultTreeCellRenderer superRenderer;
+//	private JLabel dammy = new JLabel("");
 	
 	private Color backGroundColor = null;
 	private ImageIcon openIcon = null;
@@ -43,21 +47,28 @@ public class IconTreeCellRenderer implements TreeCellRenderer{
 			boolean expanded , boolean leaf , int row , boolean hasFocus
 	) {
 		JLabel label = (JLabel)superRenderer.getTreeCellRendererComponent(tree, value, selected, expanded, leaf, row, hasFocus);
+		JLabel dammy = new JLabel("");///幅を測るためのダミーコンポーネント
+		dammy.setText((String) ((DefaultMutableTreeNode)value).getUserObject());
 		if(value instanceof Root){
 			label.setFont(bigFont);
+			dammy.setFont(bigFont);
 		}else{
 			label.setFont(font);
+			dammy.setFont(font);
 		}
-		int txtLen = label.getText().getBytes(Charset.forName("Shift_JIS")).length;
-		if(value instanceof Node){
-			label.setPreferredSize(new Dimension(txtLen*7+Main.TreeRowHeight,Main.TreeRowHeight));
-		}else{
-			label.setPreferredSize(new Dimension(txtLen*7,Main.TreeTxtHeight));
-		}
+
 		if(leaf && value instanceof Node){
 			Node node = (Node)value;
-			if(node.miniImage == null)return label;
-			label.setIcon(node.miniImage);
+			if(node.miniImage != null){
+				label.setIcon(node.miniImage);
+				dammy.setIcon(node.miniImage);
+			}
+		}
+		int twidth = dammy.getPreferredSize().width;
+		if(value instanceof Node){
+			label.setPreferredSize(new Dimension(twidth,Main.TreeRowHeight));
+		}else{
+			label.setPreferredSize(new Dimension(twidth,Main.TreeTxtHeight));
 		}
 		return label;
 	}

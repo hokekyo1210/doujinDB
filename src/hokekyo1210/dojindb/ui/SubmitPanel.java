@@ -306,22 +306,21 @@ public class SubmitPanel extends JPanel implements ActionListener, MouseListener
 	}
 	
 	private static final int offsetX = 4,offsetY = 340;
-	private static final int tagWidth = 9;
+	private static final int tagPeriod = 7,tagHeight = 26;
 	private void reloadTag(){
 		for(TagLabel tag:tags){
 			this.remove(tag);
 		}
-		int x = 8,y = 0,count = 0;
+		int x = 50,y = 0;
 		for(TagLabel tag:tags){
-			if((offsetX+x*TagLabel.width+count*6+tag.getLength()*TagLabel.width) > (panelWidth-4)){
+			if((offsetX+x+tag.getWidth()) > (panelWidth-4)){
 				///‚Í‚İ‚¾‚·‚Ì‚Å‰üs
-				x = 0;y++;count = 0;
-				if(y == 2)break;///‚Rs–Ú‚Í–³‚¢‚Ì‚Å’Ç‰Á‚ğ’ú‚ß‚é
+				x = 0;y += tagHeight;
+				///if(y == 2)break;///‚Rs–Ú‚Í–³‚¢‚Ì‚Å’Ç‰Á‚ğ’ú‚ß‚é
 			}
-			tag.reloadBounds(offsetX+x*TagLabel.width+count*6, offsetY+y*28);
+			tag.reloadBounds(offsetX+x, offsetY+y);
+			x+=tag.getWidth()+tagPeriod;
 			this.add(tag);
-			x+=tag.getLength();
-			count++;
 		}
 		this.repaint();
 	}
