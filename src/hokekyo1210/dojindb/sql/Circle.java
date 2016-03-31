@@ -56,7 +56,7 @@ public class Circle extends MyNode{
 	}
 
 	public int compare(Circle c1){
-		return this.getCircleName().compareTo(c1.getCircleName());
+		return this.getCircleName().compareToIgnoreCase(c1.getCircleName());
 	}
 
 
