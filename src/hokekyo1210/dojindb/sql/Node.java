@@ -6,6 +6,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.tree.DefaultMutableTreeNode;
@@ -78,7 +79,7 @@ public class Node extends DefaultMutableTreeNode{
 		if(image.equals("None"))return;
 		if(bigImage != null)return;
 		try{
-			bigImage = new ImageIcon(MyDropFileHandler.convert(new File(image), null));
+			bigImage = new ImageIcon(ImageIO.read(new File(image)));
 		}catch(Exception e){
 			e.printStackTrace();
 		}
