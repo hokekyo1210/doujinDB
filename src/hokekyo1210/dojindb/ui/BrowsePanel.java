@@ -11,20 +11,21 @@ import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 
+import hokekyo1210.dojindb.main.Main;
 import hokekyo1210.dojindb.sql.Node;
 
 public class BrowsePanel extends JPanel{
 	
 	private static final Color backGround = new Color(212,210,247);
-	public static final int detailPanelHeight = 120;
+	public static final int detailPanelHeight = (int)Main.DIAMETER*120;
 	
 	private int panelWidth,panelHeight;
 	private RightPanel source;
 	
 	private JScrollPane scroll;
 	private JPanel ground;///これに色々貼ってく
-	private int scrollBarWidth = 24;///スクロールバーの幅
-	private int scrollBarInc = 20;///スクロール速度
+	private int scrollBarWidth = (int)Main.DIAMETER*24;///スクロールバーの幅
+	private int scrollBarInc = (int)Main.DIAMETER*20;///スクロール速度
 	
 	private List<NodeDetailPanel> panels = new ArrayList<NodeDetailPanel>();
 	private int panelNum = 0;

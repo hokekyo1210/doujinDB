@@ -9,6 +9,7 @@ import java.awt.event.MouseListener;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 import javax.swing.ImageIcon;
@@ -280,6 +281,7 @@ public class DBPanel extends JPanel implements MouseListener , ActionListener{
 				dfsNode((DefaultMutableTreeNode) path.getLastPathComponent(),views);///ノードを再帰的に探索する
 			}
 			if(views.size() == 0)return;
+			Collections.sort(views,new Node());
 			source.getRightPanel().setBrowsePanel(views);
 			System.out.println("views "+views.size());
 			

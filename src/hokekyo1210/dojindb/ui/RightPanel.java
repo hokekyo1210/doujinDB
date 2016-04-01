@@ -29,7 +29,7 @@ public class RightPanel extends JPanel{
 		if(currentView!=null)
 			this.remove(currentView);///Ç∆ÇËÇ†Ç¶Ç∏ç°ï\é¶ÇµÇƒÇÈÉpÉlÉãè¡Ç∑
 		
-		BrowsePanel browsePanel = new BrowsePanel(RightPanel.width,RightPanel.height,this,views);
+		BrowsePanel browsePanel = new BrowsePanel((int)Main.DIAMETER*RightPanel.width,(int)Main.DIAMETER*RightPanel.height,this,views);
 		currentView = browsePanel;
 		this.add(currentView);
 		this.repaint();
