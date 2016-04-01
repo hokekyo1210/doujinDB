@@ -6,6 +6,7 @@ import javax.swing.UnsupportedLookAndFeelException;
 
 import hokekyo1210.dojindb.sql.SQLManager;
 import hokekyo1210.dojindb.ui.MainFrame;
+import hokekyo1210.dojindb.ui.util.FontManager;
 import hokekyo1210.dojindb.ui.util.IconUtil;
 
 public class Main {
@@ -21,6 +22,9 @@ public class Main {
 
 	private MainFrame frame;
 	public Main(){
+		UIManager.put("OptionPane.buttonFont", FontManager.getDefaultFont(12));
+		UIManager.put("OptionPane.font", FontManager.getDefaultFont(12));
+		UIManager.put("OptionPane.messageFont", FontManager.getDefaultFont(12));
 		try {
 			///UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
 		} catch (Exception e1) {
