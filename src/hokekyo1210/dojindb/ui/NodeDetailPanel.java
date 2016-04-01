@@ -142,8 +142,11 @@ public class NodeDetailPanel extends JPanel implements MouseListener , MouseMoti
 	@Override
 	public void mouseEntered(MouseEvent event) {
 		isEntering = true;
-		popup = new ImagePopup(node);
-		popup.show(this, event.getXOnScreen()+5, event.getYOnScreen()+5);
+		popup = ImagePopup.getImagePopup(node);
+		try{
+			popup.show(this, event.getXOnScreen()+5, event.getYOnScreen()+5);
+		}catch(Exception e){
+		}
 	}
 
 	@Override

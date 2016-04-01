@@ -3,6 +3,7 @@ package hokekyo1210.dojindb.sql;
 import java.io.File;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
@@ -14,7 +15,7 @@ import javax.swing.tree.DefaultMutableTreeNode;
 import hokekyo1210.dojindb.main.Main;
 import hokekyo1210.dojindb.ui.util.MyDropFileHandler;
 
-public class Node extends DefaultMutableTreeNode{
+public class Node extends DefaultMutableTreeNode implements Comparator<Node>{
 	
 	public String title;
 	public String circle;
@@ -32,6 +33,8 @@ public class Node extends DefaultMutableTreeNode{
 	public String table;
 	
 	public Date exDate = null;
+	
+	public Node(){}///ダミー
 	
 	public Node(String title,String circle,String artist,String date,List<String> tags,
 				String comment,String image,String thumb,String table,boolean imageLoad){
@@ -91,7 +94,7 @@ public class Node extends DefaultMutableTreeNode{
 	
 	private static final Date none = new Date(0L);
 	public int compare(Node n1) {
-		int ret = this.circle.compareTo(n1.circle);///まずサークルで比較
+		int ret = this.circle.compareToIgnoreCase(n1.circle);///まずサークルで比較
 		if(ret == 0){///サークルが同じ場合は日付で比較
 			Date d0 = this.exDate;
 			Date d1 = n1.exDate;
@@ -99,8 +102,25 @@ public class Node extends DefaultMutableTreeNode{
 			if(d1 == null)d1 = none;
 			ret = d1.compareTo(d0);
 			if(ret == 0){///日付も同じ場合はタイトル
-				ret = this.title.compareTo(n1.title);
+				ret = this.title.compareToIgnoreCase(n1.title);
 			}
+		}
+		return ret;
+	}
+
+	@Override
+	public int compare(Node n1, Node n2) {
+		int ret = 0;
+		Date d1 = n1.exDate;
+		Date d2 = n2.exDate;
+		if(d1 == null)d1 = none;
+		if(d2 == null)d2 = none;
+		ret = d2.compareTo(d1);
+		if(ret == 0){///サークルで比較
+			ret = n1.circle.compareToIgnoreCase(n2.circle);
+		}
+		if(ret == 0){///タイトルで比較
+			ret = n1.title.compareToIgnoreCase(n2.title);
 		}
 		return ret;
 	}
