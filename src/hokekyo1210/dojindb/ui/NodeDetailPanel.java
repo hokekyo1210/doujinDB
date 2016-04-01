@@ -146,9 +146,6 @@ public class NodeDetailPanel extends JPanel implements MouseListener , MouseMoti
 		try{
 			popup.show(this, event.getXOnScreen()+5, event.getYOnScreen()+5);
 		}catch(Exception e){
-			popup.setVisible(false);
-			popup = null;
-			isEntering = false;
 		}
 	}
 

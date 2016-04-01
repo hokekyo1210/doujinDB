@@ -35,6 +35,7 @@ import hokekyo1210.dojindb.sql.MyNode;
 import hokekyo1210.dojindb.sql.Node;
 import hokekyo1210.dojindb.sql.Root;
 import hokekyo1210.dojindb.sql.SQLManager;
+import hokekyo1210.dojindb.ui.util.FontManager;
 import hokekyo1210.dojindb.ui.util.IconTreeCellRenderer;
 import hokekyo1210.dojindb.ui.util.IconUtil;
 import hokekyo1210.dojindb.ui.util.MyDropFileHandler;
@@ -183,6 +184,11 @@ public class DBPanel extends JPanel implements MouseListener , ActionListener{
 		JMenuItem item3 = new JMenuItem("ï¬Ç∂ÇÈ");
 		JMenuItem item4 = new JMenuItem("èCê≥");
 		JMenuItem item = new JMenuItem("çÌèú");
+		item.setFont(FontManager.getDefaultFont(12));
+		item2.setFont(FontManager.getDefaultFont(12));
+		item3.setFont(FontManager.getDefaultFont(12));
+		item4.setFont(FontManager.getDefaultFont(12));
+		item5.setFont(FontManager.getDefaultFont(12));
 		menu.add(item5);
 		if(folder){
 			menu.add(item2);
