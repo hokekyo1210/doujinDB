@@ -15,6 +15,8 @@ import javax.swing.JMenuItem;
 import javax.swing.SwingUtilities;
 
 
+import hokekyo1210.dojindb.main.Main;
+
 public class MainFrame extends JFrame implements ActionListener{
 	
 	private static final int width = 660,///630
@@ -39,7 +41,7 @@ public class MainFrame extends JFrame implements ActionListener{
 	private void initFrame(){
 		this.setTitle(title);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setSize(MainFrame.width, MainFrame.height);
+		this.setSize((int)Main.DIAMETER*MainFrame.width, (int)Main.DIAMETER*MainFrame.height);
 		this.setResizable(false);
 		this.setLocationRelativeTo(null);///‰æ–Ê‚Ì’†‰›‚ÉˆÚ“®
 		
@@ -58,8 +60,8 @@ public class MainFrame extends JFrame implements ActionListener{
 		this.setJMenuBar(menuBar);
 		
 		inputPanel = new InputPanel(0,0,this);
-		dbPanel = new DBPanel(1,34,this);
-		rightPanel = new RightPanel(222,0);
+		dbPanel = new DBPanel(1,(int)Main.DIAMETER*34,this);
+		rightPanel = new RightPanel((int)Main.DIAMETER*222,0);
 		this.add(inputPanel);
 		this.add(dbPanel);
 		this.add(rightPanel);

@@ -13,6 +13,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.TransferHandler;
 
+import hokekyo1210.dojindb.main.Main;
 import hokekyo1210.dojindb.ui.MyImageLabel;
 
 public class MyDropFileHandler extends TransferHandler{
@@ -42,16 +43,16 @@ public class MyDropFileHandler extends TransferHandler{
 		int tarWidth,tarHeight;///–Ú•W‚Æ‚·‚éƒTƒCƒY
 		double resizePer;///k¬(Šg‘å)—¦
 		if(fheight > fwidth){///c’·‚Ì‰æ‘œ
-			tarHeight = height;
+			tarHeight = (int)Main.DIAMETER*height;
 			resizePer = (double)tarHeight/fheight*1.0;
 			tarWidth = (int) (fwidth*resizePer);
 		}else{
-			tarWidth = width;
+			tarWidth = (int)Main.DIAMETER*width;
 			resizePer = (double)tarWidth/fwidth*1.0;
 			tarHeight = (int) (fheight*resizePer);
 		}
-		if(tarWidth>width+2){///‚Í‚Ý‚¾‚µ‚¿‚á‚Á‚Ä‚é
-			tarWidth = width;
+		if(tarWidth>(int)Main.DIAMETER*width+2){///‚Í‚Ý‚¾‚µ‚¿‚á‚Á‚Ä‚é
+			tarWidth = (int)Main.DIAMETER*width;
 			resizePer = (double)tarWidth/fwidth*1.0;
 			tarHeight = (int) (fheight*resizePer);
 		}

@@ -26,6 +26,7 @@ import javax.swing.border.EtchedBorder;
 import hokekyo1210.dojindb.crawler.Crawler;
 import hokekyo1210.dojindb.crawler.SearchResult;
 import hokekyo1210.dojindb.sql.Node;
+import hokekyo1210.dojindb.main.Main;
 import hokekyo1210.dojindb.sql.Root;
 import hokekyo1210.dojindb.sql.SQLManager;
 import hokekyo1210.dojindb.ui.util.MyDropFileHandler;
@@ -60,7 +61,7 @@ public class SubmitPanel extends JPanel implements ActionListener, MouseListener
 		this.panelWidth = width;
 		this.source = source;
 		this.isModification = false;
-		this.setBounds(2, 2, width-3, height-3);
+		this.setBounds(2, 2, (int)Main.DIAMETER*width-3, (int)Main.DIAMETER*height-3);
 		this.setBackground(backGroundColor);
 		initPanel();
 		initComponents();
@@ -72,7 +73,7 @@ public class SubmitPanel extends JPanel implements ActionListener, MouseListener
 		this.source = src;
 		this.isModification = true;
 		this.beforeNode = node;
-		this.setBounds(2, 2, width-3, height-3);
+		this.setBounds(2, 2, (int)Main.DIAMETER*width-3, (int)Main.DIAMETER*height-3);
 		this.setBackground(backGroundColor);
 		initPanel();
 		initComponents();
@@ -161,61 +162,61 @@ public class SubmitPanel extends JPanel implements ActionListener, MouseListener
 		imageArea.setBackground(otherColor);
 		imageArea.setOpaque(true);
 		imageArea.setBorder(new EtchedBorder(EtchedBorder.RAISED, Color.white, Color.black));
-		imageArea.setBounds(4, 4, 220, 300);
+		imageArea.setBounds(4, 4, (int)Main.DIAMETER*220, (int)Main.DIAMETER*300);
 		imageArea.setToolTipText("ここに画像をドラッグ&ドロップ");
 		imageArea.setTransferHandler(new MyDropFileHandler(imageArea));
 
 		this.add(imageArea);
 		
 		JLabel titleLabel = new JLabel("タイトル:");
-		titleLabel.setFont(new Font("メイリオ", Font.PLAIN, 15));
-		titleLabel.setBounds(226,8,100,20);
+		titleLabel.setFont(new Font("メイリオ", Font.PLAIN, (int)Main.DIAMETER*15));
+		titleLabel.setBounds((int)Main.DIAMETER*226,8,(int)Main.DIAMETER*100,(int)Main.DIAMETER*20);
 		titleField = new JTextField();
-		titleField.setBounds(228, 30, 194, 28);
-		titleField.setFont(new Font("メイリオ", Font.PLAIN, 12));
+		titleField.setBounds((int)Main.DIAMETER*228, (int)Main.DIAMETER*30, (int)Main.DIAMETER*194, (int)Main.DIAMETER*28);
+		titleField.setFont(new Font("メイリオ", Font.PLAIN, (int)Main.DIAMETER*12));
 		titleField.setBackground(otherColor);
 		titleField.addActionListener(this);
 		this.add(titleLabel);
 		this.add(titleField);
 		
 		JLabel circleLabel = new JLabel("サークル名:");
-		circleLabel.setFont(new Font("メイリオ", Font.PLAIN, 15));
-		circleLabel.setBounds(226,66,100,20);
+		circleLabel.setFont(new Font("メイリオ", Font.PLAIN, (int)Main.DIAMETER*15));
+		circleLabel.setBounds((int)Main.DIAMETER*226,(int)Main.DIAMETER*66,(int)Main.DIAMETER*100,(int)Main.DIAMETER*20);
 		circleField = new JTextField();
-		circleField.setBounds(228, 88, 194, 28);
-		circleField.setFont(new Font("メイリオ", Font.PLAIN, 12));
+		circleField.setBounds((int)Main.DIAMETER*228, (int)Main.DIAMETER*88, (int)Main.DIAMETER*194, (int)Main.DIAMETER*28);
+		circleField.setFont(new Font("メイリオ", Font.PLAIN, (int)Main.DIAMETER*12));
 		circleField.setBackground(otherColor);
 		this.add(circleLabel);
 		this.add(circleField);
 		
 		JLabel artistLabel = new JLabel("著者:");
-		artistLabel.setFont(new Font("メイリオ", Font.PLAIN, 15));
-		artistLabel.setBounds(226,124,100,20);
+		artistLabel.setFont(new Font("メイリオ", Font.PLAIN, (int)Main.DIAMETER*15));
+		artistLabel.setBounds((int)Main.DIAMETER*226,(int)Main.DIAMETER*124,(int)Main.DIAMETER*100,(int)Main.DIAMETER*20);
 		artistField = new JTextField();
-		artistField.setBounds(228, 148, 194, 28);
-		artistField.setFont(new Font("メイリオ", Font.PLAIN, 12));
+		artistField.setBounds((int)Main.DIAMETER*228, (int)Main.DIAMETER*148, (int)Main.DIAMETER*194, (int)Main.DIAMETER*28);
+		artistField.setFont(new Font("メイリオ", Font.PLAIN, (int)Main.DIAMETER*12));
 		artistField.setBackground(otherColor);
 		this.add(artistLabel);
 		this.add(artistField);
 		
 		JLabel dateLabel = new JLabel("発行日:");
-		dateLabel.setFont(new Font("メイリオ", Font.PLAIN, 15));
-		dateLabel.setBounds(226,184,100,20);
+		dateLabel.setFont(new Font("メイリオ", Font.PLAIN, (int)Main.DIAMETER*15));
+		dateLabel.setBounds((int)Main.DIAMETER*226,(int)Main.DIAMETER*184,(int)Main.DIAMETER*100,(int)Main.DIAMETER*20);
 		year = new JFormattedTextField(new DecimalFormat("0000"));
 		month = new JFormattedTextField(new DecimalFormat("00"));
 		day = new JFormattedTextField(new DecimalFormat("00"));
 		JLabel yLabel = new JLabel("年");
 		JLabel mLabel = new JLabel("月");
 		JLabel dLabel = new JLabel("日");
-		year.setFont(new Font("メイリオ", Font.PLAIN, 16));
-		month.setFont(new Font("メイリオ", Font.PLAIN, 16));
-		day.setFont(new Font("メイリオ", Font.PLAIN, 16));
-		year.setBounds(226+20, 206, 50, 26);
-		yLabel.setBounds(226+20+53, 206, 50, 26);
-		month.setBounds(296+20, 206, 26, 26);
-		mLabel.setBounds(296+20+29, 206, 26, 26);
-		day.setBounds(344+20, 206, 26, 26);
-		dLabel.setBounds(344+20+29, 206, 26, 26);
+		year.setFont(new Font("メイリオ", Font.PLAIN, (int)Main.DIAMETER*16));
+		month.setFont(new Font("メイリオ", Font.PLAIN, (int)Main.DIAMETER*16));
+		day.setFont(new Font("メイリオ", Font.PLAIN, (int)Main.DIAMETER*16));
+		year.setBounds((int)Main.DIAMETER*(226+20), (int)Main.DIAMETER*206, (int)Main.DIAMETER*50, (int)Main.DIAMETER*26);
+		yLabel.setBounds((int)Main.DIAMETER*(226+20+53), (int)Main.DIAMETER*206, (int)Main.DIAMETER*50, (int)Main.DIAMETER*26);
+		month.setBounds((int)Main.DIAMETER*(296+20), (int)Main.DIAMETER*206, (int)Main.DIAMETER*26, (int)Main.DIAMETER*26);
+		mLabel.setBounds((int)Main.DIAMETER*(296+20+29), (int)Main.DIAMETER*206, (int)Main.DIAMETER*26, (int)Main.DIAMETER*26);
+		day.setBounds((int)Main.DIAMETER*(344+20), (int)Main.DIAMETER*206, (int)Main.DIAMETER*26, (int)Main.DIAMETER*26);
+		dLabel.setBounds((int)Main.DIAMETER*(344+20+29), (int)Main.DIAMETER*206, (int)Main.DIAMETER*26, (int)Main.DIAMETER*26);
 		year.setBackground(otherColor);
 		month.setBackground(otherColor);
 		day.setBackground(otherColor);
@@ -225,11 +226,11 @@ public class SubmitPanel extends JPanel implements ActionListener, MouseListener
 		this.add(day);this.add(dLabel);
 		
 		JLabel kindLabel = new JLabel("種類:");
-		kindLabel.setFont(new Font("メイリオ", Font.PLAIN, 15));
-		kindLabel.setBounds(226,244,100,20);
+		kindLabel.setFont(new Font("メイリオ", Font.PLAIN, (int)Main.DIAMETER*15));
+		kindLabel.setBounds((int)Main.DIAMETER*226,(int)Main.DIAMETER*244,(int)Main.DIAMETER*100,(int)Main.DIAMETER*20);
 		kindBox = new JComboBox(kinds);
-		kindBox.setFont(new Font("メイリオ", Font.BOLD, 15));
-		kindBox.setBounds(230, 266, 190, 30);
+		kindBox.setFont(new Font("メイリオ", Font.BOLD, (int)Main.DIAMETER*15));
+		kindBox.setBounds((int)Main.DIAMETER*230, (int)Main.DIAMETER*266, (int)Main.DIAMETER*190, (int)Main.DIAMETER*30);
 		this.add(kindLabel);
 		this.add(kindBox);
 		
@@ -238,12 +239,12 @@ public class SubmitPanel extends JPanel implements ActionListener, MouseListener
 		tagField.addActionListener(this);
 		addButton = new JButton("追加");
 		addButton.addActionListener(this);
-		tagLabel.setFont(new Font("メイリオ", Font.PLAIN, 18));
-		tagField.setFont(new Font("メイリオ", Font.PLAIN, 12));
-		addButton.setFont(new Font("メイリオ", Font.PLAIN, 12));
-		tagField.setBounds(4, 310+2, 150, 26);
-		addButton.setBounds(154, 310+2, 70, 26);
-		tagLabel.setBounds(4, 338, 60, 26);
+		tagLabel.setFont(new Font("メイリオ", Font.PLAIN, (int)Main.DIAMETER*18));
+		tagField.setFont(new Font("メイリオ", Font.PLAIN, (int)Main.DIAMETER*12));
+		addButton.setFont(new Font("メイリオ", Font.PLAIN, (int)Main.DIAMETER*12));
+		tagField.setBounds((int)Main.DIAMETER*4, (int)Main.DIAMETER*310+2, (int)Main.DIAMETER*150, (int)Main.DIAMETER*26);
+		addButton.setBounds((int)Main.DIAMETER*154, (int)Main.DIAMETER*310+2, (int)Main.DIAMETER*70, (int)Main.DIAMETER*26);
+		tagLabel.setBounds((int)Main.DIAMETER*4, (int)Main.DIAMETER*338, (int)Main.DIAMETER*60, (int)Main.DIAMETER*26);
 		tagField.setBackground(otherColor);
 		this.add(tagField);
 		this.add(addButton);
@@ -255,10 +256,10 @@ public class SubmitPanel extends JPanel implements ActionListener, MouseListener
                 JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, 
                 JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 		commentArea.setLineWrap(true);
-		commentLabel.setFont(new Font("メイリオ", Font.PLAIN, 18));
-		commentArea.setFont(new Font("メイリオ", Font.PLAIN, 14));
-		commentLabel.setBounds(4, 400, 100, 26);
-		scrollPane.setBounds(4, 428, 420, 120);
+		commentLabel.setFont(new Font("メイリオ", Font.PLAIN, (int)Main.DIAMETER*18));
+		commentArea.setFont(new Font("メイリオ", Font.PLAIN, (int)Main.DIAMETER*14));
+		commentLabel.setBounds((int)Main.DIAMETER*4, (int)Main.DIAMETER*400, (int)Main.DIAMETER*100, (int)Main.DIAMETER*26);
+		scrollPane.setBounds((int)Main.DIAMETER*4, (int)Main.DIAMETER*428, (int)Main.DIAMETER*420, (int)Main.DIAMETER*120);
 		commentArea.setBackground(otherColor);
 		commentArea.setEnabled(true);
 		commentArea.setEditable(true);
@@ -266,8 +267,8 @@ public class SubmitPanel extends JPanel implements ActionListener, MouseListener
 		this.add(scrollPane);
 		
 		clearButton = new JButton("Clear");
-		clearButton.setFont(new Font("メイリオ", Font.PLAIN, 14));
-		clearButton.setBounds(250, 552, 80, 30);
+		clearButton.setFont(new Font("メイリオ", Font.PLAIN, (int)Main.DIAMETER*14));
+		clearButton.setBounds((int)Main.DIAMETER*250, (int)Main.DIAMETER*552, (int)Main.DIAMETER*80, (int)Main.DIAMETER*30);
 		clearButton.addActionListener(this);
 		
 		if(!isModification){
@@ -275,8 +276,8 @@ public class SubmitPanel extends JPanel implements ActionListener, MouseListener
 		}else{
 			submitButton = new JButton("修正");
 		}
-		submitButton.setFont(new Font("メイリオ", Font.PLAIN, 14));
-		submitButton.setBounds(340, 552, 80, 30);
+		submitButton.setFont(new Font("メイリオ", Font.PLAIN, (int)Main.DIAMETER*14));
+		submitButton.setBounds((int)Main.DIAMETER*340, (int)Main.DIAMETER*552, (int)Main.DIAMETER*80, (int)Main.DIAMETER*30);
 		submitButton.addActionListener(this);
 		submitButton.setForeground(Color.BLACK);
 		this.add(submitButton);
@@ -313,13 +314,13 @@ public class SubmitPanel extends JPanel implements ActionListener, MouseListener
 		}
 		int x = 50,y = 0;
 		for(TagLabel tag:tags){
-			if((offsetX+x+tag.getWidth()) > (panelWidth-4)){
+			if((int)Main.DIAMETER*(offsetX+x+tag.getWidth()) > (int)Main.DIAMETER*(panelWidth-4)){
 				///はみだすので改行
-				x = 0;y += tagHeight;
+				x = 0;y += (int)Main.DIAMETER*tagHeight;
 				///if(y == 2)break;///３行目は無いので追加を諦める
 			}
-			tag.reloadBounds(offsetX+x, offsetY+y);
-			x+=tag.getWidth()+tagPeriod;
+			tag.reloadBounds((int)Main.DIAMETER*(offsetX+x), (int)Main.DIAMETER*(offsetY+y));
+			x+=(int)Main.DIAMETER*(tag.getWidth()+tagPeriod);
 			this.add(tag);
 		}
 		this.repaint();

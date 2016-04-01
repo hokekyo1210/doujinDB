@@ -16,6 +16,8 @@ public class Main {
 	public static final int TreeTxtHeight = 18;
 	public static final int thumbnailWidth = 80;///ブラウジングに使うサムネの大きさ
 	public static final int thumbnailHeight = 110;
+	
+	public static final double DIAMETER = 2.0;
 
 	private MainFrame frame;
 	public Main(){
