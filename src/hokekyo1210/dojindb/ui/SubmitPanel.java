@@ -29,6 +29,7 @@ import hokekyo1210.dojindb.sql.Node;
 import hokekyo1210.dojindb.main.Main;
 import hokekyo1210.dojindb.sql.Root;
 import hokekyo1210.dojindb.sql.SQLManager;
+import hokekyo1210.dojindb.ui.util.FontManager;
 import hokekyo1210.dojindb.ui.util.MyDropFileHandler;
 
 public class SubmitPanel extends JPanel implements ActionListener, MouseListener,Runnable{
@@ -208,6 +209,9 @@ public class SubmitPanel extends JPanel implements ActionListener, MouseListener
 		JLabel yLabel = new JLabel("年");
 		JLabel mLabel = new JLabel("月");
 		JLabel dLabel = new JLabel("日");
+		yLabel.setFont(FontManager.getDefaultFont(10));
+		mLabel.setFont(FontManager.getDefaultFont(10));
+		dLabel.setFont(FontManager.getDefaultFont(10));
 		year.setFont(new Font("メイリオ", Font.PLAIN, (int)Main.DIAMETER*16));
 		month.setFont(new Font("メイリオ", Font.PLAIN, (int)Main.DIAMETER*16));
 		day.setFont(new Font("メイリオ", Font.PLAIN, (int)Main.DIAMETER*16));
