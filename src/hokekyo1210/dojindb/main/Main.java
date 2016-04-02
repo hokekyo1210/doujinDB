@@ -22,6 +22,8 @@ public class Main {
 
 	private MainFrame frame;
 	public Main(){
+		UIManager.put("ScrollBar.width", new Integer((int)Main.DIAMETER*UIManager.getInt("ScrollBar.width")));
+		UIManager.put("ScrollBar.height", new Integer((int)Main.DIAMETER*UIManager.getInt("ScrollBar.height")));
 		UIManager.put("OptionPane.buttonFont", FontManager.getDefaultFont(12));
 		UIManager.put("OptionPane.font", FontManager.getDefaultFont(12));
 		UIManager.put("OptionPane.messageFont", FontManager.getDefaultFont(12));
