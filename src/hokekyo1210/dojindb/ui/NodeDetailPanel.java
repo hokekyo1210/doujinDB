@@ -88,6 +88,7 @@ public class NodeDetailPanel extends JPanel implements MouseListener , MouseMoti
 		artistLabel = new JLabel(node.artist);
 		label3.setFont(FontManager.getDefaultFont(11));
 		artistLabel.setFont(FontManager.getDefaultFont(13));
+		panelWidth = Math.max(panelWidth, 145 + artistLabel.getPreferredSize().width + 10);///タイトルがはみ出す場合のために常にチェック
 		label3.setBounds(107, 43+6, 50, 20);
 		artistLabel.setBounds(145, 44+6, artistLabel.getPreferredSize().width, 20);
 		this.add(label3);

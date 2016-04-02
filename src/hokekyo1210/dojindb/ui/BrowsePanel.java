@@ -13,7 +13,7 @@ import javax.swing.UIManager;
 
 import hokekyo1210.dojindb.sql.Node;
 
-public class BrowsePanel extends JPanel{
+public class BrowsePanel extends JPanel implements Runnable{
 	
 	private static final Color backGround = new Color(212,210,247);
 	public static final int detailPanelHeight = 120;
@@ -29,17 +29,40 @@ public class BrowsePanel extends JPanel{
 	private List<NodeDetailPanel> panels = new ArrayList<NodeDetailPanel>();
 	private int panelNum = 0;
 	
+	private boolean isEnd = false;
+	
+	public void end(){
+		isEnd = true;
+	}
+	
 	public BrowsePanel(int width,int height,RightPanel source,List<Node> views){
 		this.panelWidth = width;
 		this.panelHeight = height;
 		this.source = source;
 		initPanel();
-		addNode(views);
-		resizeGround();
-		System.out.println(scrollBarWidth);
+		initViews(views);
+//		addNode(views);
+//		resizeGround();
 	}
 	
-	public void addNode(Node node){
+	private void initViews(List<Node> views) {
+		this.temp = views;
+		Thread th = new Thread(this);
+		th.start();
+	}
+	private List<Node> temp;
+	@Override
+	public void run(){
+		for(Node node : temp){
+			if(isEnd)break;
+			addNode(node);
+			resizeGround();
+		}
+//		if(!isEnd)resizeGround();
+		this.repaint();
+	}
+
+	public synchronized void addNode(Node node){
 		NodeDetailPanel detail = new NodeDetailPanel(panelNum,panelWidth-scrollBarWidth,detailPanelHeight,node,this);
 		detail.reloadBounds(0, panelNum * detailPanelHeight);
 		panels.add(detail);

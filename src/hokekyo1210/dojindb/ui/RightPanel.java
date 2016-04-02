@@ -23,9 +23,17 @@ public class RightPanel extends JPanel{
 		setSubmitPanel();///最初はサブミットパネル出す
 	}
 	
+	public void removeCurrentView(){
+		if(currentView == null)return;
+		this.remove(currentView);
+		if(currentView instanceof BrowsePanel){
+			((BrowsePanel)currentView).end();
+		}
+		currentView = null;
+	}
+	
 	public void setBrowsePanel(List<Node> views){
-		if(currentView!=null)
-			this.remove(currentView);///とりあえず今表示してるパネル消す
+		removeCurrentView();
 		
 		BrowsePanel browsePanel = new BrowsePanel(RightPanel.width,RightPanel.height,this,views);
 		currentView = browsePanel;
@@ -34,8 +42,7 @@ public class RightPanel extends JPanel{
 	}
 	
 	public void setSubmitPanel(){
-		if(currentView!=null)
-			this.remove(currentView);///とりあえず今表示してるパネル消す
+		removeCurrentView();
 		
 		SubmitPanel submitPanel = new SubmitPanel(RightPanel.width,RightPanel.height,this);
 		currentView = submitPanel;
@@ -44,8 +51,7 @@ public class RightPanel extends JPanel{
 	}
 	
 	public void setModificationPanel(Node node){///修正用
-		if(currentView!=null)
-			this.remove(currentView);///とりあえず今表示してるパネル消す
+		removeCurrentView();
 		
 		SubmitPanel submitPanel = new SubmitPanel(RightPanel.width,RightPanel.height,this,node);
 		currentView = submitPanel;

@@ -188,7 +188,9 @@ public class DBPanel extends JPanel implements MouseListener , ActionListener{
 			menu.add(item2);
 			menu.add(item3);
 		}
-		menu.add(item4);
+		if(!folder){///ƒm[ƒh‚È‚çC³‚ğ•\¦
+			menu.add(item4);
+		}
 		menu.add(item);
 		menu.show(jTree, x, y);
 		item5.addActionListener(this);
