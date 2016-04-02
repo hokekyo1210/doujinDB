@@ -151,6 +151,7 @@ public class SQLManager {
 		String query = "DROP TABLE '"+root.getName()+"'";
 		try {
 			query2(query);
+			tables.remove(root);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

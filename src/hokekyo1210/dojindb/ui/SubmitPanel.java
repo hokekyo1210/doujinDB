@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.File;
@@ -15,6 +17,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
@@ -30,12 +33,13 @@ import hokekyo1210.dojindb.sql.Root;
 import hokekyo1210.dojindb.sql.SQLManager;
 import hokekyo1210.dojindb.ui.util.MyDropFileHandler;
 
-public class SubmitPanel extends JPanel implements ActionListener, MouseListener,Runnable{
+public class SubmitPanel extends JPanel implements ActionListener, MouseListener,Runnable, ItemListener{
 	
 	private static final Color backGroundColor = new Color(212,230,247);
 	///private static final Color otherColor = new Color(232,255,247);
 	private static final Color otherColor = new Color(246,255,247);
 	
+	private SubmitPanel own;
 	private RightPanel source;
 	private int panelWidth;
 	private boolean isModification;///修正かどうか
@@ -57,6 +61,7 @@ public class SubmitPanel extends JPanel implements ActionListener, MouseListener
 	private static Crawler workingThread = null;
 	
 	public SubmitPanel(int width,int height,RightPanel source){
+		this.own = this;
 		this.panelWidth = width;
 		this.source = source;
 		this.isModification = false;
@@ -68,6 +73,7 @@ public class SubmitPanel extends JPanel implements ActionListener, MouseListener
 	}
 	
 	public SubmitPanel(int width,int height,RightPanel src,Node node){///修正用
+		this.own = this;
 		this.panelWidth = width;
 		this.source = src;
 		this.isModification = true;
@@ -154,6 +160,7 @@ public class SubmitPanel extends JPanel implements ActionListener, MouseListener
 		List<Root> tables = SQLManager.getTables();
 		List<String> temp = new ArrayList<String>();
 		for(Root r:tables)temp.add(r.getName());
+		temp.add("追加...");
 		kinds = temp.toArray();
 		
 		this.setLayout(null);
@@ -230,6 +237,7 @@ public class SubmitPanel extends JPanel implements ActionListener, MouseListener
 		kindBox = new JComboBox(kinds);
 		kindBox.setFont(new Font("メイリオ", Font.BOLD, 15));
 		kindBox.setBounds(230, 266, 190, 30);
+		kindBox.addItemListener(this);
 		this.add(kindLabel);
 		this.add(kindBox);
 		
@@ -410,6 +418,44 @@ public class SubmitPanel extends JPanel implements ActionListener, MouseListener
 		this.repaint();
 	}
 	
+	public void remakeKindBox(String select){
+		List<Root> tables = SQLManager.getTables();
+		List<String> temp = new ArrayList<String>();
+		for(Root r:tables)temp.add(r.getName());
+		temp.add("追加...");
+		kinds = temp.toArray();
+		
+		this.remove(kindBox);
+		kindBox = new JComboBox(kinds);
+		kindBox.setFont(new Font("メイリオ", Font.BOLD, 15));
+		kindBox.setBounds(230, 266, 190, 30);
+		kindBox.addItemListener(this);
+		if(select != null && !select.equals("")){
+			kindBox.setSelectedItem(select);
+		}
+		this.add(kindBox);
+		SwingUtilities.invokeLater(new Runnable(){
+			public void run(){
+				kindBox.revalidate();
+				own.repaint();
+			}
+		});
+	}
+	
+	@Override
+	public void itemStateChanged(ItemEvent event) {
+		if(event.getStateChange() == ItemEvent.SELECTED){
+			String tar = (String)kindBox.getSelectedItem();
+			if(!tar.equals("追加..."))return;
+			String ret = JOptionPane.showInputDialog("追加する種類名を入力してください。");
+			System.out.println(ret);
+			if(ret != null && !ret.equals("")){
+				SQLManager.addNewTable(ret);
+			}
+			remakeKindBox(ret);
+		}
+	}
+	
 	
 
 	@Override
@@ -420,6 +466,8 @@ public class SubmitPanel extends JPanel implements ActionListener, MouseListener
 	public void mouseExited(MouseEvent e) {}
 	@Override
 	public void mouseReleased(MouseEvent e) {}
+
+
 
 
 
