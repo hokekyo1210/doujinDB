@@ -57,11 +57,10 @@ public class InputPanel extends JPanel implements ActionListener, MouseListener{
 	}
 	
 	@Override
-	public void actionPerformed(ActionEvent event) {///新しいテーブルを追加するよ！
+	public void actionPerformed(ActionEvent event) {///検索するよ！！
 		String tableName = inputField.getText();
 		if(tableName.equalsIgnoreCase(""))return;
-		SQLManager.addNewTable(tableName);
-		inputField.setText("");
+		
 	}
 	
 	@Override

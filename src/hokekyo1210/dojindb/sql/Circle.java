@@ -10,6 +10,8 @@ import javax.swing.tree.DefaultMutableTreeNode;
 public class Circle extends MyNode{
 	
 	private String circleName;
+	private String lastArtist;
+	private String circleSpace = "";///イベント用
 	
 	public Circle(String circleName){
 		super(circleName);
@@ -22,9 +24,13 @@ public class Circle extends MyNode{
 		return this;
 	}
 	
-	/*public List<Node> getNodes(){
-		return nodes;
-	}*/
+	public void reloadNodeName(){///ツリーに作品数を表示する
+		if(circleSpace.equals("")){
+			this.setUserObject(circleName+"("+(getNodeCount())+")");
+		}else{
+			this.setUserObject("["+circleSpace+"]"+circleName+"("+(getNodeCount())+")");
+		}
+	}
 	
 	public void addNode(Node node){
 		boolean done = false;
@@ -36,7 +42,8 @@ public class Circle extends MyNode{
 			}
 		}
 		if(!done)this.add(node);///最後に入れる
-		this.setUserObject(circleName+"("+(getNodeCount())+")");
+		this.lastArtist = node.artist;
+		reloadNodeName();
 	}
 	public void removeNode(Node node){///実装したで
 		for(int i = 0;i < getNodeCount();i++){
@@ -45,7 +52,7 @@ public class Circle extends MyNode{
 				break;
 			}
 		}
-		this.setUserObject(circleName+"("+(getNodeCount())+")");
+		reloadNodeName();
 	}
 	public int getNodeCount(){
 		return this.getChildCount();
@@ -53,6 +60,14 @@ public class Circle extends MyNode{
 	
 	public String getCircleName(){
 		return circleName;
+	}
+	
+	public String getLastArtist(){
+		return lastArtist;
+	}
+	public void setCircleSpace(String circleSpace){
+		this.circleSpace = circleSpace;
+		reloadNodeName();
 	}
 
 	public int compare(Circle c1){

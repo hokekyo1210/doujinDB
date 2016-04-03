@@ -14,6 +14,8 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.SwingUtilities;
 
+import hokekyo1210.dojindb.util.ReitaisaiLoader;
+
 
 public class MainFrame extends JFrame implements ActionListener{
 	
@@ -52,9 +54,14 @@ public class MainFrame extends JFrame implements ActionListener{
 		JMenuBar menuBar = new JMenuBar();
 		JMenu menu = new JMenu("File");
 		JMenuItem exitItem = new JMenuItem("Exit");
+		JMenu menu2 = new JMenu("Plugin");
+		JMenuItem exItem = new JMenuItem("ó·ëÂç’13");
 		exitItem.addActionListener(this);
+		exItem.addActionListener(this);
 		menu.add(exitItem);
+		menu2.add(exItem);
 		menuBar.add(menu);
+		menuBar.add(menu2);
 		this.setJMenuBar(menuBar);
 		
 		inputPanel = new InputPanel(0,0,this);
@@ -74,6 +81,9 @@ public class MainFrame extends JFrame implements ActionListener{
 		JMenuItem source = (JMenuItem) event.getSource();
 		if(source.getText().equals("Exit")){
 			System.exit(0);
+		}else if(source.getText().equals("ó·ëÂç’13")){
+			ReitaisaiLoader sp = new ReitaisaiLoader();///ó·ëÂç’ÇÃÉfÅ[É^ì«Ç›çûÇﬁ
+			sp.runThread();
 		}
 	}
 }

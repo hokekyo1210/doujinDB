@@ -7,6 +7,7 @@ import javax.swing.UnsupportedLookAndFeelException;
 import hokekyo1210.dojindb.sql.SQLManager;
 import hokekyo1210.dojindb.ui.MainFrame;
 import hokekyo1210.dojindb.ui.util.IconUtil;
+import hokekyo1210.dojindb.util.ReitaisaiLoader;
 
 public class Main {
 	
@@ -19,6 +20,7 @@ public class Main {
 
 	private MainFrame frame;
 	public Main(){
+
 		try {
 			///UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
 		} catch (Exception e1) {
@@ -31,6 +33,7 @@ public class Main {
 			e.printStackTrace();
 			System.exit(0);
 		}
+		
 		new IconUtil("resources");
 		frame = new MainFrame(Main.title);
 		///setToolTip();

@@ -447,7 +447,7 @@ public class SubmitPanel extends JPanel implements ActionListener, MouseListener
 		if(event.getStateChange() == ItemEvent.SELECTED){
 			String tar = (String)kindBox.getSelectedItem();
 			if(!tar.equals("’Ç‰Á..."))return;
-			String ret = JOptionPane.showInputDialog("’Ç‰Á‚·‚éí—Ş–¼‚ğ“ü—Í‚µ‚Ä‚­‚¾‚³‚¢B");
+			String ret = JOptionPane.showInputDialog(own,"’Ç‰Á‚·‚éí—Ş–¼‚ğ“ü—Í‚µ‚Ä‚­‚¾‚³‚¢B");
 			System.out.println(ret);
 			if(ret != null && !ret.equals("")){
 				SQLManager.addNewTable(ret);
