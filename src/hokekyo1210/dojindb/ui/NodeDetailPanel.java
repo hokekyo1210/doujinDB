@@ -103,9 +103,9 @@ public class NodeDetailPanel extends JPanel implements MouseListener , MouseMoti
 		tagLabel = new JLabel(tag);
 		label5.setFont(FontManager.getDefaultFont(11));
 		tagLabel.setFont(FontManager.getDefaultFont(13));
-		panelWidth = Math.max(panelWidth, 145 + tagLabel.getPreferredSize().width + 10);///タグがはみ出す場合のために常にチェック
-		label5.setBounds(118, 63+9, 40, 20);
-		tagLabel.setBounds(145, 64+9, tagLabel.getPreferredSize().width, 20);
+		panelWidth = Math.max(panelWidth, (int)Main.DIAMETER*145 + tagLabel.getPreferredSize().width + 10);///タグがはみ出す場合のために常にチェック
+		label5.setBounds((int)Main.DIAMETER*118, (int)Main.DIAMETER*(63+9), (int)Main.DIAMETER*40, (int)Main.DIAMETER*20);
+		tagLabel.setBounds((int)Main.DIAMETER*145, (int)Main.DIAMETER*(64+9), tagLabel.getPreferredSize().width, (int)Main.DIAMETER*20);
 		this.add(label5);
 		this.add(tagLabel);
 		

@@ -433,8 +433,8 @@ public class SubmitPanel extends JPanel implements ActionListener, MouseListener
 		
 		this.remove(kindBox);
 		kindBox = new JComboBox(kinds);
-		kindBox.setFont(new Font("メイリオ", Font.BOLD, 15));
-		kindBox.setBounds(230, 266, 190, 30);
+		kindBox.setFont(new Font("メイリオ", Font.BOLD, (int)Main.DIAMETER*15));
+		kindBox.setBounds((int)Main.DIAMETER*230, (int)Main.DIAMETER*266, (int)Main.DIAMETER*190, (int)Main.DIAMETER*30);
 		kindBox.addItemListener(this);
 		if(select != null && !select.equals("")){
 			kindBox.setSelectedItem(select);
