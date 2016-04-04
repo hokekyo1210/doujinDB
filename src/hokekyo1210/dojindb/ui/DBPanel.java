@@ -35,6 +35,7 @@ import hokekyo1210.dojindb.sql.MyNode;
 import hokekyo1210.dojindb.sql.Node;
 import hokekyo1210.dojindb.sql.Root;
 import hokekyo1210.dojindb.sql.SQLManager;
+import hokekyo1210.dojindb.ui.util.FontManager;
 import hokekyo1210.dojindb.ui.util.IconTreeCellRenderer;
 import hokekyo1210.dojindb.ui.util.IconUtil;
 import hokekyo1210.dojindb.ui.util.MyDropFileHandler;
@@ -55,7 +56,7 @@ public class DBPanel extends JPanel implements MouseListener , ActionListener{
 	
 	public DBPanel(int x,int y,MainFrame source){
 		this.source = source;
-		this.setBounds(x, y, DBPanel.width,DBPanel.height);
+		this.setBounds(x, y, (int)Main.DIAMETER*DBPanel.width,(int)Main.DIAMETER*DBPanel.height);
 		this.setBackground(backGroundColor);
 		initPanel();
 		initComponent();
@@ -157,8 +158,8 @@ public class DBPanel extends JPanel implements MouseListener , ActionListener{
 
 	private void initComponent() {
 		IconTreeCellRenderer renderer = new IconTreeCellRenderer();
-		renderer.setFont(new Font("メイリオ", Font.PLAIN, 12));
-		renderer.setBigFont(new Font("メイリオ", Font.BOLD, 12));
+		renderer.setFont(new Font("メイリオ", Font.PLAIN, (int)Main.DIAMETER*12));
+		renderer.setBigFont(new Font("メイリオ", Font.BOLD, (int)Main.DIAMETER*12));
 		jTree = new JTree(rootNode);
 //		jTree.setRowHeight(Main.TreeRowHeight);
 		jTree.setRowHeight(0);
@@ -169,7 +170,7 @@ public class DBPanel extends JPanel implements MouseListener , ActionListener{
 		jTree.addMouseListener(this);
 		model = (DefaultTreeModel)jTree.getModel();
 		scroll = new JScrollPane(jTree);
-		scroll.setBounds(0, 0, width, height);
+		scroll.setBounds(0, 0, (int)Main.DIAMETER*width, (int)Main.DIAMETER*height);
 		scroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		scroll.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
 		scroll.getVerticalScrollBar().setUnitIncrement(10);
@@ -183,6 +184,11 @@ public class DBPanel extends JPanel implements MouseListener , ActionListener{
 		JMenuItem item3 = new JMenuItem("閉じる");
 		JMenuItem item4 = new JMenuItem("修正");
 		JMenuItem item = new JMenuItem("削除");
+		item.setFont(FontManager.getDefaultFont(12));
+		item2.setFont(FontManager.getDefaultFont(12));
+		item3.setFont(FontManager.getDefaultFont(12));
+		item4.setFont(FontManager.getDefaultFont(12));
+		item5.setFont(FontManager.getDefaultFont(12));
 		menu.add(item5);
 		if(folder){
 			menu.add(item2);

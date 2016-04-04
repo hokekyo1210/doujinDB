@@ -82,7 +82,7 @@ public class Node extends DefaultMutableTreeNode implements Comparator<Node>{
 		if(image.equals("None"))return;
 		if(bigImage != null)return;
 		try{
-			bigImage = new ImageIcon(ImageIO.read(new File(image)));
+			bigImage = new ImageIcon(MyDropFileHandler.convert(new File(image), thumbnailLabel));
 		}catch(Exception e){
 			e.printStackTrace();
 		}

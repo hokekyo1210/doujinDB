@@ -66,9 +66,9 @@ public class IconTreeCellRenderer implements TreeCellRenderer{
 		}
 		int twidth = dammy.getPreferredSize().width;
 		if(value instanceof Node){
-			label.setPreferredSize(new Dimension(twidth,Main.TreeRowHeight));
+			label.setPreferredSize(new Dimension(twidth,(int)Main.DIAMETER*Main.TreeRowHeight));
 		}else{
-			label.setPreferredSize(new Dimension(twidth,Main.TreeTxtHeight));
+			label.setPreferredSize(new Dimension(twidth,(int)Main.DIAMETER*Main.TreeTxtHeight));
 		}
 		return label;
 	}

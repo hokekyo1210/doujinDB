@@ -10,6 +10,8 @@ import javax.swing.border.BevelBorder;
 
 import hokekyo1210.dojindb.sql.Node;
 
+import hokekyo1210.dojindb.main.Main;
+
 public class RightPanel extends JPanel{
 	
 	private static final int width = 430,height = 590;
@@ -18,7 +20,7 @@ public class RightPanel extends JPanel{
 	
 	public RightPanel(int x,int y){
 		this.setLayout(null);
-		this.setBounds(x, y, RightPanel.width,RightPanel.height);
+		this.setBounds(x, y, (int)Main.DIAMETER*RightPanel.width,(int)Main.DIAMETER*RightPanel.height);
 		initPanel();
 		setSubmitPanel();///最初はサブミットパネル出す
 	}
@@ -35,7 +37,7 @@ public class RightPanel extends JPanel{
 	public void setBrowsePanel(List<Node> views){
 		removeCurrentView();
 		
-		BrowsePanel browsePanel = new BrowsePanel(RightPanel.width,RightPanel.height,this,views);
+		BrowsePanel browsePanel = new BrowsePanel((int)Main.DIAMETER*RightPanel.width,(int)Main.DIAMETER*RightPanel.height,this,views);
 		currentView = browsePanel;
 		this.add(currentView);
 		this.repaint();
@@ -44,7 +46,7 @@ public class RightPanel extends JPanel{
 	public void setSubmitPanel(){
 		removeCurrentView();
 		
-		SubmitPanel submitPanel = new SubmitPanel(RightPanel.width,RightPanel.height,this);
+		SubmitPanel submitPanel = new SubmitPanel((int)Main.DIAMETER*RightPanel.width,(int)Main.DIAMETER*RightPanel.height,this);
 		currentView = submitPanel;
 		this.add(currentView);
 		this.repaint();

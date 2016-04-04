@@ -14,6 +14,7 @@ import javax.swing.JScrollPane;
 import javax.swing.SwingUtilities;
 
 import hokekyo1210.dojindb.crawler.SearchResult;
+import hokekyo1210.dojindb.ui.util.FontManager;
 
 public class SearchPopup extends JPopupMenu implements MouseListener{
 	
@@ -57,7 +58,8 @@ public class SearchPopup extends JPopupMenu implements MouseListener{
 		list.addMouseListener(this);
 		JScrollPane scroll = new JScrollPane(list);
 		scroll.setBorder(null);
-		list.setFocusable( false ); 
+		list.setFocusable( false );
+		list.setFont(FontManager.getDefaultFont(12));
         scroll.getVerticalScrollBar().setFocusable( false ); 
         scroll.getHorizontalScrollBar().setFocusable( false ); 
 		this.add(scroll);

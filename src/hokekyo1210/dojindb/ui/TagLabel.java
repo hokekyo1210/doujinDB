@@ -9,6 +9,9 @@ import javax.swing.border.LineBorder;
 
 import com.sun.xml.internal.ws.util.StringUtils;
 
+import hokekyo1210.dojindb.main.Main;
+import hokekyo1210.dojindb.ui.util.FontManager;
+
 public class TagLabel extends JLabel{
 	
 	/**
@@ -33,6 +36,7 @@ public class TagLabel extends JLabel{
 		this.setVerticalAlignment(JLabel.CENTER);
 		this.setText(tag);
 		this.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		this.setFont(FontManager.getDefaultFont(11));
 		this.pwidth = this.getPreferredSize().width + 6;
 	}
 	
@@ -45,7 +49,7 @@ public class TagLabel extends JLabel{
 	}
 	
 	public void reloadBounds(int x,int y){
-		this.setBounds(x, y, pwidth, height);
+		this.setBounds(x, y, (int)Main.DIAMETER*pwidth, (int)Main.DIAMETER*height);
 	}
 
 }

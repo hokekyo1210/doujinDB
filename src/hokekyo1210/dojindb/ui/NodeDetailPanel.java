@@ -52,7 +52,7 @@ public class NodeDetailPanel extends JPanel implements MouseListener , MouseMoti
 			int thWidth = node.thumbnail.getIconWidth();
 			int thHeight = node.thumbnail.getIconHeight();
 			int calc = (panelHeight-thHeight)/2;
-			int calc2 = (92-thWidth)/2;
+			int calc2 = ((int)Main.DIAMETER*92-thWidth)/2;
 			imageLabel.setBounds(calc2, calc, thWidth+2, thHeight+2);
 			imageLabel.setBorder(new LineBorder(Color.black,1));
 			imageLabel.addMouseListener(this);///ポップアップ用のリスナー
@@ -61,7 +61,7 @@ public class NodeDetailPanel extends JPanel implements MouseListener , MouseMoti
 		}
 		
 		JSeparator separator = new JSeparator(JSeparator.VERTICAL);
-		separator.setBounds(92, 6, 4, 108);
+		separator.setBounds((int)Main.DIAMETER*92, (int)Main.DIAMETER*6, (int)Main.DIAMETER*4, (int)Main.DIAMETER*108);
 		this.add(separator);
 		
 		JLabel label1 = new JLabel("タイトル:");
@@ -69,9 +69,9 @@ public class NodeDetailPanel extends JPanel implements MouseListener , MouseMoti
 		label1.setFont(FontManager.getDefaultFont(11));
 		titleLabel.setFont(FontManager.getDefaultFontU(14));
 		int titleWidth = titleLabel.getPreferredSize().width;
-		panelWidth = Math.max(panelWidth, 145 + titleWidth + 10);///タイトルがはみ出す場合のために常にチェック
-		label1.setBounds(96, 3, 50, 20);
-		titleLabel.setBounds(145, 4, titleWidth, 20);
+		panelWidth = Math.max(panelWidth, (int)Main.DIAMETER*145 + titleWidth + (int)Main.DIAMETER*10);///タイトルがはみ出す場合のために常にチェック
+		label1.setBounds((int)Main.DIAMETER*96, (int)Main.DIAMETER*3, (int)Main.DIAMETER*50, (int)Main.DIAMETER*20);
+		titleLabel.setBounds((int)Main.DIAMETER*145, (int)Main.DIAMETER*4, titleWidth, (int)Main.DIAMETER*20);
 		this.add(label1);
 		this.add(titleLabel);
 		
@@ -79,8 +79,8 @@ public class NodeDetailPanel extends JPanel implements MouseListener , MouseMoti
 		circleLabel = new JLabel(node.circle);
 		label2.setFont(FontManager.getDefaultFont(11));
 		circleLabel.setFont(FontManager.getDefaultFont(13));
-		label2.setBounds(96, 23+3, 50, 20);
-		circleLabel.setBounds(145, 24+3, circleLabel.getPreferredSize().width, 20);
+		label2.setBounds((int)Main.DIAMETER*96, (int)Main.DIAMETER*(23+3), (int)Main.DIAMETER*50, (int)Main.DIAMETER*20);
+		circleLabel.setBounds((int)Main.DIAMETER*145, (int)Main.DIAMETER*(24+3), circleLabel.getPreferredSize().width, (int)Main.DIAMETER*20);
 		this.add(label2);
 		this.add(circleLabel);
 		
@@ -88,9 +88,9 @@ public class NodeDetailPanel extends JPanel implements MouseListener , MouseMoti
 		artistLabel = new JLabel(node.artist);
 		label3.setFont(FontManager.getDefaultFont(11));
 		artistLabel.setFont(FontManager.getDefaultFont(13));
-		panelWidth = Math.max(panelWidth, 145 + artistLabel.getPreferredSize().width + 10);///タイトルがはみ出す場合のために常にチェック
-		label3.setBounds(107, 43+6, 50, 20);
-		artistLabel.setBounds(145, 44+6, artistLabel.getPreferredSize().width, 20);
+		panelWidth = Math.max(panelWidth, (int)Main.DIAMETER*145 + artistLabel.getPreferredSize().width + 10);///タイトルがはみ出す場合のために常にチェック
+		label3.setBounds((int)Main.DIAMETER*107, (int)Main.DIAMETER*(43+6), (int)Main.DIAMETER*50, (int)Main.DIAMETER*20);
+		artistLabel.setBounds((int)Main.DIAMETER*145, (int)Main.DIAMETER*(44+6), artistLabel.getPreferredSize().width, (int)Main.DIAMETER*20);
 		this.add(label3);
 		this.add(artistLabel);
 		
@@ -113,15 +113,15 @@ public class NodeDetailPanel extends JPanel implements MouseListener , MouseMoti
 		dateLabel = new JLabel(node.date);
 		label4.setFont(FontManager.getDefaultFont(11));
 		dateLabel.setFont(FontManager.getDefaultFont(13));
-		label4.setBounds(107, 83+12, 50, 20);
-		dateLabel.setBounds(145, 84+12, dateLabel.getPreferredSize().width, 20);
+		label4.setBounds((int)Main.DIAMETER*107, (int)Main.DIAMETER*(83+12), (int)Main.DIAMETER*50, (int)Main.DIAMETER*20);
+		dateLabel.setBounds((int)Main.DIAMETER*145, (int)Main.DIAMETER*(84+12), dateLabel.getPreferredSize().width, (int)Main.DIAMETER*20);
 		this.add(label4);
 		this.add(dateLabel);
 		
 		if(!node.comment.equals("None")){
 			JLabel label6 = new JLabel("コメント表示");
 			label6.setFont(FontManager.getDefaultFont(12));
-			label6.setBounds(250, 83+12, 78, 20);
+			label6.setBounds((int)Main.DIAMETER*250, (int)Main.DIAMETER*(83+12), (int)Main.DIAMETER*78, (int)Main.DIAMETER*20);
 			label6.setBorder(new LineBorder(Color.BLACK,1,true));
 			this.add(label6);
 		}
