@@ -8,6 +8,7 @@ import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
 
+import javax.swing.Box;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -18,6 +19,7 @@ import hokekyo1210.dojindb.util.ReitaisaiLoader;
 
 
 import hokekyo1210.dojindb.main.Main;
+import hokekyo1210.dojindb.ui.util.FontManager;
 
 public class MainFrame extends JFrame implements ActionListener{
 	
@@ -58,12 +60,17 @@ public class MainFrame extends JFrame implements ActionListener{
 		JMenuItem exitItem = new JMenuItem("Exit");
 		JMenu menu2 = new JMenu("Plugin");
 		JMenuItem exItem = new JMenuItem("ó·ëÂç’13");
+		menu.setFont(FontManager.getDefaultFont(12));
+		menu2.setFont(FontManager.getDefaultFont(12));
+		exitItem.setFont(FontManager.getDefaultFont(12));
+		exItem.setFont(FontManager.getDefaultFont(12));
 		exitItem.addActionListener(this);
 		exItem.addActionListener(this);
 		menu.add(exitItem);
 		menu2.add(exItem);
 		menuBar.add(menu);
 		menuBar.add(menu2);
+		
 		this.setJMenuBar(menuBar);
 		
 		inputPanel = new InputPanel(0,0,this);
