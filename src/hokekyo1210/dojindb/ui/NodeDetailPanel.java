@@ -10,7 +10,6 @@ import javax.swing.JPanel;
 import javax.swing.JSeparator;
 import javax.swing.border.LineBorder;
 
-import hokekyo1210.dojindb.main.Main;
 import hokekyo1210.dojindb.sql.Node;
 import hokekyo1210.dojindb.ui.util.FontManager;
 

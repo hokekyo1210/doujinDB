@@ -6,13 +6,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.io.File;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
-import javax.swing.ImageIcon;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -21,23 +18,16 @@ import javax.swing.JScrollPane;
 import javax.swing.JTree;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingUtilities;
-import javax.swing.border.EtchedBorder;
 import javax.swing.tree.DefaultMutableTreeNode;
-import javax.swing.tree.DefaultTreeCellRenderer;
 import javax.swing.tree.DefaultTreeModel;
-import javax.swing.tree.MutableTreeNode;
-import javax.swing.tree.TreeNode;
 import javax.swing.tree.TreePath;
 
-import hokekyo1210.dojindb.main.Main;
 import hokekyo1210.dojindb.sql.Circle;
 import hokekyo1210.dojindb.sql.MyNode;
 import hokekyo1210.dojindb.sql.Node;
 import hokekyo1210.dojindb.sql.Root;
 import hokekyo1210.dojindb.sql.SQLManager;
 import hokekyo1210.dojindb.ui.util.IconTreeCellRenderer;
-import hokekyo1210.dojindb.ui.util.IconUtil;
-import hokekyo1210.dojindb.ui.util.MyDropFileHandler;
 
 public class DBPanel extends JPanel implements MouseListener , ActionListener{
 	

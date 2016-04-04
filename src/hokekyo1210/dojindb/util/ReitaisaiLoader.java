@@ -62,7 +62,6 @@ public class ReitaisaiLoader implements Runnable{///ó·ëÂç’13óp
 				String circleName = tar.getCircleName();
 				String artistName = tar.getLastArtist();
 				double maxi = 0.0;
-				String tmp = "";
 				String tmp2 = "";
 				for(int j = 0;j < circles.size();j++){
 					String space = spaces.get(j);
@@ -79,12 +78,10 @@ public class ReitaisaiLoader implements Runnable{///ó·ëÂç’13óp
 					
 					if(score2 == 1.0){
 						maxi = 1.0;
-						tmp = l;
 						tmp2 = space;
 					}
 					if(maxi < score1){
 						maxi = score1;
-						tmp = l;
 						tmp2 = space;
 					}
 				}

@@ -4,9 +4,6 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.io.File;
-import java.nio.charset.Charset;
-import java.util.HashMap;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;

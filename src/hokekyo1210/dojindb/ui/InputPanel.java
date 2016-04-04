@@ -14,10 +14,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
-import javax.swing.border.EtchedBorder;
 import javax.swing.border.LineBorder;
 
-import hokekyo1210.dojindb.sql.SQLManager;
 import hokekyo1210.dojindb.ui.util.IconUtil;
 
 public class InputPanel extends JPanel implements ActionListener, MouseListener{

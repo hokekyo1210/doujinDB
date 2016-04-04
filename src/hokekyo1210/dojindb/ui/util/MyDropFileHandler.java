@@ -5,11 +5,9 @@ import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.Transferable;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.IOException;
 import java.util.List;
 
 import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.TransferHandler;
 
@@ -65,6 +63,7 @@ public class MyDropFileHandler extends TransferHandler{
 		return ret;
 	}
 	
+	@SuppressWarnings("unchecked")
 	@Override
 	public boolean importData(TransferSupport support) {
 		// Žó‚¯Žæ‚Á‚Ä‚¢‚¢‚à‚Ì‚©Šm”F‚·‚é

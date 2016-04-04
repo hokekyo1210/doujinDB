@@ -4,15 +4,10 @@ import java.io.File;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
-
-import javax.swing.tree.TreeNode;
 
 import hokekyo1210.dojindb.ui.DBPanel;
 
@@ -162,13 +157,10 @@ public class SQLManager {
 			if(!r.getName().equals(table))continue;
 			Circle c = r.getCircle(node.circle);
 			
-			TreeNode target;///リフレッシュするノード
-			
 			if(c == null){///サークル新規登録
 				c = new Circle(node.circle);
 				r.addCircle(c);
-				target = r.getTreeNode();
-			}else target = c.getTreeNode();
+			}
 			c.addNode(node);
 //			DBPanel.treeRefresh(target);///ツリーに変更を伝える
 			DBPanel.treeRefresh();

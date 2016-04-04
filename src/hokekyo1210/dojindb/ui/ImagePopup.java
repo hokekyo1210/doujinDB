@@ -3,7 +3,6 @@ package hokekyo1210.dojindb.ui;
 import java.awt.Color;
 import java.util.HashMap;
 
-import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPopupMenu;
 import javax.swing.border.LineBorder;

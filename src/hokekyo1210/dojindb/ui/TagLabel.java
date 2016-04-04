@@ -2,12 +2,9 @@ package hokekyo1210.dojindb.ui;
 
 import java.awt.Color;
 import java.awt.Cursor;
-import java.nio.charset.Charset;
 
 import javax.swing.JLabel;
 import javax.swing.border.LineBorder;
-
-import com.sun.xml.internal.ws.util.StringUtils;
 
 public class TagLabel extends JLabel{
 	

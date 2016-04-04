@@ -1,11 +1,6 @@
 package hokekyo1210.dojindb.crawler;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
@@ -74,7 +69,6 @@ public class Crawler implements Runnable{
 	public void run() {
 		System.out.println("Crawler is running...");
 		long start = System.currentTimeMillis();
-		String[] split = searchWord.split(" ");
 		String url,url2;
 		try {
 			url = URLEncoder.encode(searchWord, "UTF-8");///urlエンコード

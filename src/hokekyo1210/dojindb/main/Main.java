@@ -1,13 +1,10 @@
 package hokekyo1210.dojindb.main;
 
 import javax.swing.ToolTipManager;
-import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
 
 import hokekyo1210.dojindb.sql.SQLManager;
 import hokekyo1210.dojindb.ui.MainFrame;
 import hokekyo1210.dojindb.ui.util.IconUtil;
-import hokekyo1210.dojindb.util.ReitaisaiLoader;
 
 public class Main {
 	

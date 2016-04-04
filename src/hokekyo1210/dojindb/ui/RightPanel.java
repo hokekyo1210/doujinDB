@@ -4,8 +4,6 @@ import java.util.List;
 
 import javax.swing.JComponent;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.SwingUtilities;
 import javax.swing.border.BevelBorder;
 
 import hokekyo1210.dojindb.sql.Node;

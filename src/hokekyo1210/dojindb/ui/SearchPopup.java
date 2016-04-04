@@ -22,7 +22,7 @@ public class SearchPopup extends JPopupMenu implements MouseListener{
 	private List<String> converted = new ArrayList<String>();
 	private HashMap<String,SearchResult> idmemo = new HashMap<String,SearchResult>();
 	
-	private JList list;
+	private JList<Object> list;
 	
 	
 	public SearchPopup(List<SearchResult> results,SubmitPanel source){
@@ -53,7 +53,7 @@ public class SearchPopup extends JPopupMenu implements MouseListener{
 
 	private void initPopup() {
 		this.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-		list = new JList(converted.toArray());
+		list = new JList<Object>(converted.toArray());
 		list.addMouseListener(this);
 		JScrollPane scroll = new JScrollPane(list);
 		scroll.setBorder(null);

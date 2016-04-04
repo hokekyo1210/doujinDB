@@ -20,7 +20,6 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JSeparator;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
@@ -49,7 +48,7 @@ public class SubmitPanel extends JPanel implements ActionListener, MouseListener
 	private JTextField titleField,circleField,artistField;
 	private JFormattedTextField year,month,day;
 	///JFormattedTextField textBox = new JFormattedTextField(new DecimalFormat("###.##"));
-	private JComboBox kindBox;
+	private JComboBox<Object> kindBox;
 	private Object[] kinds;
 	private JTextField tagField;
 	private JButton addButton;
@@ -234,7 +233,7 @@ public class SubmitPanel extends JPanel implements ActionListener, MouseListener
 		JLabel kindLabel = new JLabel("種類:");
 		kindLabel.setFont(new Font("メイリオ", Font.PLAIN, 15));
 		kindLabel.setBounds(226,244,100,20);
-		kindBox = new JComboBox(kinds);
+		kindBox = new JComboBox<Object>(kinds);
 		kindBox.setFont(new Font("メイリオ", Font.BOLD, 15));
 		kindBox.setBounds(230, 266, 190, 30);
 		kindBox.addItemListener(this);
@@ -426,7 +425,7 @@ public class SubmitPanel extends JPanel implements ActionListener, MouseListener
 		kinds = temp.toArray();
 		
 		this.remove(kindBox);
-		kindBox = new JComboBox(kinds);
+		kindBox = new JComboBox<Object>(kinds);
 		kindBox.setFont(new Font("メイリオ", Font.BOLD, 15));
 		kindBox.setBounds(230, 266, 190, 30);
 		kindBox.addItemListener(this);

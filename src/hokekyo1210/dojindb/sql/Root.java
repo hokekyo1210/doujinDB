@@ -1,8 +1,5 @@
 package hokekyo1210.dojindb.sql;
 
-import java.util.Collection;
-import java.util.HashMap;
-
 import javax.swing.tree.DefaultMutableTreeNode;
 
 public class Root extends MyNode{
