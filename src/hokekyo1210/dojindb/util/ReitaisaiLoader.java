@@ -14,7 +14,7 @@ import hokekyo1210.dojindb.ui.DBPanel;
 public class ReitaisaiLoader implements Runnable{///ó·ëÂç’13óp
 
 	private static final String url = "http://s.reitaisai.com/rts13/name-circle/";
-	private static final double distance = 0.99;
+	private static final double distance = 0.85;
 	
 	public static HashMap<Circle,String> circleSpace = new HashMap<Circle,String>();
 	
