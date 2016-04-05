@@ -34,7 +34,10 @@ public class SearchResult{
 		artist = getArtist(ret);
 		tags = new ArrayList<String>();
 		
-		imageURL = ret.split("\" zoom-photo-url=\"")[1].split("\" style=\"")[0];
+		String[] tmp = ret.split("\" zoom-photo-url=\"");
+		if(tmp.length != 1){
+			imageURL = tmp[1].split("\" style=\"")[0];
+		}
 	
 		System.out.println(imageURL);
 		System.out.println(artist);
