@@ -1,21 +1,16 @@
 package hokekyo1210.dojindb.ui;
 
-import java.awt.Dimension;
-import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
-import java.awt.event.ComponentListener;
 
 import javax.swing.Box;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
-import javax.swing.SwingUtilities;
 
-import hokekyo1210.dojindb.util.ReitaisaiLoader;
+import hokekyo1210.dojindb.plugins.BarGraph;
+import hokekyo1210.dojindb.plugins.ReitaisaiLoader;
 
 
 import hokekyo1210.dojindb.main.Main;
@@ -60,14 +55,18 @@ public class MainFrame extends JFrame implements ActionListener{
 		JMenuItem exitItem = new JMenuItem("Exit");
 		JMenu menu2 = new JMenu("Plugin");
 		JMenuItem exItem = new JMenuItem("例大祭13");
+		JMenuItem graphItem = new JMenuItem("グラフ表示");
 		menu.setFont(FontManager.getDefaultFont(12));
 		menu2.setFont(FontManager.getDefaultFont(12));
 		exitItem.setFont(FontManager.getDefaultFont(12));
 		exItem.setFont(FontManager.getDefaultFont(12));
+		graphItem.setFont(FontManager.getDefaultFont(12));
 		exitItem.addActionListener(this);
 		exItem.addActionListener(this);
+		graphItem.addActionListener(this);
 		menu.add(exitItem);
 		menu2.add(exItem);
+		menu2.add(graphItem);
 		menuBar.add(menu);
 		menuBar.add(menu2);
 		
@@ -93,6 +92,9 @@ public class MainFrame extends JFrame implements ActionListener{
 		}else if(source.getText().equals("例大祭13")){
 			ReitaisaiLoader sp = new ReitaisaiLoader();///例大祭のデータ読み込む
 			sp.runThread();
+		}else if(source.getText().equals("グラフ表示")){
+			BarGraph graph = new BarGraph();
+			graph.show(this, 0, 0);
 		}
 	}
 }

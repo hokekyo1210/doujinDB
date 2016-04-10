@@ -66,6 +66,7 @@ public class MyDropFileHandler extends TransferHandler{
 		return ret;
 	}
 	
+	@SuppressWarnings("unchecked")
 	@Override
 	public boolean importData(TransferSupport support) {
 		// Žó‚¯Žæ‚Á‚Ä‚¢‚¢‚à‚Ì‚©Šm”F‚·‚é

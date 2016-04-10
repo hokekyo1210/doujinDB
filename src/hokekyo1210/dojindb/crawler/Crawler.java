@@ -74,7 +74,6 @@ public class Crawler implements Runnable{
 	public void run() {
 		System.out.println("Crawler is running...");
 		long start = System.currentTimeMillis();
-		String[] split = searchWord.split(" ");
 		String url,url2;
 		try {
 			url = URLEncoder.encode(searchWord, "UTF-8");///urlエンコード

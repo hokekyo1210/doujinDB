@@ -20,7 +20,6 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JSeparator;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
@@ -171,7 +170,6 @@ public class SubmitPanel extends JPanel implements ActionListener, MouseListener
 		imageArea.setOpaque(true);
 		imageArea.setBorder(new EtchedBorder(EtchedBorder.RAISED, Color.white, Color.black));
 		imageArea.setBounds(4, 4, (int)Main.DIAMETER*220, (int)Main.DIAMETER*300);
-		imageArea.setToolTipText("ここに画像をドラッグ&ドロップ");
 		imageArea.setTransferHandler(new MyDropFileHandler(imageArea));
 
 		this.add(imageArea);

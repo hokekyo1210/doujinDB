@@ -44,12 +44,12 @@ public class Main {
 		
 		new IconUtil("resources");
 		frame = new MainFrame(Main.title);
-		///setToolTip();
+		setToolTip();
 	}
 	
 	private void setToolTip(){
 		ToolTipManager tp = ToolTipManager.sharedInstance();
-		tp.setInitialDelay(1000);
+		tp.setInitialDelay(0);
 	}
 
 	public static void main(String[] args) {

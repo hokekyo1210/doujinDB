@@ -26,9 +26,9 @@ public class MyImageLabel extends JLabel{
 	}
 	
 	public String save(){///‰æ‘œ‚ğ•Û‘¶‚·‚é
-		if(!dir.equals("") && new File(dir).exists()){///bug fix
-			return dir;
-		}
+		/*if(!dir.equals("") && new File(dir).exists()){///bug fix
+			return dir;///‰æ‘œíœ‚Æ‚©‚Å–â‘è‚ªo‚é‚©‚ç‚Æ‚è‚ ‚¦‚¸–ˆ‰ñ¶¬‚·‚é,ƒSƒ~‚Ìˆ—‚Í•Ê‚Å‚â‚ê‚Î‚¢‚¢
+		}*/
 		
 		if(!(new File(DIR).exists())){
 			new File(DIR).mkdirs();
