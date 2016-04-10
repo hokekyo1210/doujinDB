@@ -74,7 +74,8 @@ public class Node extends DefaultMutableTreeNode implements Comparator<Node>{
 				thumbnailLabel.setIcon(thumbnail);
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			///e.printStackTrace();
+			System.out.println("image load error! "+title+" ("+image+")");
 		}
 	}
 	
