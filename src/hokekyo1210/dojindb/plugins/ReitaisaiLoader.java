@@ -1,4 +1,4 @@
-package hokekyo1210.dojindb.util;
+package hokekyo1210.dojindb.plugins;
 
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
@@ -10,6 +10,7 @@ import hokekyo1210.dojindb.sql.Circle;
 import hokekyo1210.dojindb.sql.Root;
 import hokekyo1210.dojindb.sql.SQLManager;
 import hokekyo1210.dojindb.ui.DBPanel;
+import hokekyo1210.dojindb.util.LevenshteinDistance;
 
 public class ReitaisaiLoader implements Runnable{///ó·ëÂç’13óp
 

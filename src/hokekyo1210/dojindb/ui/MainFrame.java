@@ -8,7 +8,7 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 
-import hokekyo1210.dojindb.util.ReitaisaiLoader;
+import hokekyo1210.dojindb.plugins.ReitaisaiLoader;
 
 
 public class MainFrame extends JFrame implements ActionListener{
