@@ -168,7 +168,6 @@ public class SubmitPanel extends JPanel implements ActionListener, MouseListener
 		imageArea.setOpaque(true);
 		imageArea.setBorder(new EtchedBorder(EtchedBorder.RAISED, Color.white, Color.black));
 		imageArea.setBounds(4, 4, 220, 300);
-		imageArea.setToolTipText("ここに画像をドラッグ&ドロップ");
 		imageArea.setTransferHandler(new MyDropFileHandler(imageArea));
 
 		this.add(imageArea);
