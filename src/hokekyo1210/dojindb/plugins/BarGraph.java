@@ -13,6 +13,7 @@ import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
 import javax.swing.tree.TreeNode;
 
+import hokekyo1210.dojindb.main.Main;
 import hokekyo1210.dojindb.sql.Node;
 import hokekyo1210.dojindb.sql.Root;
 import hokekyo1210.dojindb.sql.SQLManager;
@@ -21,8 +22,8 @@ import hokekyo1210.dojindb.ui.util.FontManager;
 public class BarGraph extends JPopupMenu{
 	
 	private static final Date none = new Date(0L);
-	private static final int width = 600;
-	private static final int height = 300;
+	private static final int width = (int)Main.DIAMETER*600;
+	private static final int height = (int)Main.DIAMETER*300;
 	
 	private List<Node> targets;
 	private List<Date> sortedKey = new ArrayList<Date>();
@@ -64,7 +65,7 @@ public class BarGraph extends JPopupMenu{
 			int value = amount[i];
 			JLabel bar = new JLabel();
 			bar.setBackground(Color.GREEN);
-			bar.setBounds(pWidth * i + 10, height - (pHeight * value) - 10, pWidth, pHeight * value);
+			bar.setBounds(pWidth * i + (int)Main.DIAMETER*10, height - (pHeight * value) - (int)Main.DIAMETER*10, pWidth, pHeight * value);
 			bar.setOpaque(true);
 			bar.setToolTipText(String.valueOf(value));
 			bigLabel.add(bar);
@@ -76,12 +77,12 @@ public class BarGraph extends JPopupMenu{
 				JLabel yLabel = new JLabel(year);
 				yLabel.setFont(FontManager.getDefaultFont(10));
 				yLabel.setHorizontalAlignment(JLabel.LEFT);
-				yLabel.setBounds(pWidth * i,height - 10, 30, 10);
+				yLabel.setBounds(pWidth * i,height - (int)Main.DIAMETER*10, (int)Main.DIAMETER*30, (int)Main.DIAMETER*10);
 				bigLabel.add(yLabel);
 			}
 		}
 		
-		bigLabel.setPreferredSize(new Dimension(pWidth * amount.length + 20,height));
+		bigLabel.setPreferredSize(new Dimension(pWidth * amount.length + (int)Main.DIAMETER*20,height));
 		
 		this.add(bigLabel);
 	}
