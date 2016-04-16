@@ -13,8 +13,10 @@ public class RightPanel extends JPanel{
 	private static final int width = 430,height = 590;
 	
 	private JComponent currentView = null;
+	private MainFrame source;
 	
-	public RightPanel(int x,int y){
+	public RightPanel(int x,int y,MainFrame source){
+		this.source = source;
 		this.setLayout(null);
 		this.setBounds(x, y, RightPanel.width,RightPanel.height);
 		initPanel();
@@ -35,6 +37,7 @@ public class RightPanel extends JPanel{
 		
 		BrowsePanel browsePanel = new BrowsePanel(RightPanel.width,RightPanel.height,this,views);
 		currentView = browsePanel;
+		source.setTitle(source.title + "("+views.size()+")");
 		this.add(currentView);
 		this.repaint();
 	}

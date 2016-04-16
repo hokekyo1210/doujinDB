@@ -108,6 +108,20 @@ public class Node extends DefaultMutableTreeNode implements Comparator<Node>{
 		}
 		return ret;
 	}
+	
+	public boolean hasWord(String word){
+		boolean ret = false;
+		ret =   title.indexOf(word)!=-1||
+				circle.indexOf(word)!=-1||
+				artist.indexOf(word)!=-1||
+				date.indexOf(word)!=-1;
+		if(ret)return ret;
+		for(String tag : tags){
+			ret |= tag.indexOf(word)!=-1;
+			if(ret)break;
+		}
+		return ret;
+	}
 
 	@Override
 	public int compare(Node n1, Node n2) {

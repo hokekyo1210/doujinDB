@@ -8,6 +8,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -16,6 +19,8 @@ import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 import javax.swing.border.LineBorder;
 
+import hokekyo1210.dojindb.sql.Node;
+import hokekyo1210.dojindb.sql.SQLManager;
 import hokekyo1210.dojindb.ui.util.IconUtil;
 
 public class InputPanel extends JPanel implements ActionListener, MouseListener{
@@ -35,14 +40,15 @@ public class InputPanel extends JPanel implements ActionListener, MouseListener{
 
 	private void initComponents() {
 		inputField = new JTextField();
-		inputField.setBounds(1, 1, 162, 32);
+		inputField.setBounds(1, 1, 156, 32);
 		inputField.setFont(new Font("メイリオ", Font.PLAIN, 14));
+		inputField.addActionListener(this);
 		this.add(inputField);
 		
-		JButton addBtn = new JButton("+");
+		JButton addBtn = new JButton(IconUtil.getIcon("zoom.png"));
 		addBtn.setFont(new Font("メイリオ", Font.PLAIN, 18));
 		addBtn.setMargin(new Insets(0,0,0,0));
-		addBtn.setBounds(162, 1, 24, 31);
+		addBtn.setBounds(156, 1, 30, 31);
 		addBtn.addActionListener(this);
 		this.add(addBtn);
 		
@@ -54,11 +60,22 @@ public class InputPanel extends JPanel implements ActionListener, MouseListener{
 		this.add(subBtn);
 	}
 	
+	private void searchDB(String word){
+		List<Node> target = SQLManager.getAllNodes();
+		List<Node> views = new ArrayList<Node>();
+		for(Node node : target){
+			if(!node.hasWord(word))continue;
+			views.add(node);
+		}
+		Collections.sort(views,new Node());
+		source.getRightPanel().setBrowsePanel(views);
+	}
+	
 	@Override
 	public void actionPerformed(ActionEvent event) {///検索するよ！！
-		String tableName = inputField.getText();
-		if(tableName.equalsIgnoreCase(""))return;
-		
+		String word = inputField.getText();
+		if(word.equalsIgnoreCase(""))return;
+		searchDB(word);
 	}
 	
 	@Override

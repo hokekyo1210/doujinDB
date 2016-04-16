@@ -36,6 +36,7 @@ public class IconUtil {
 		iconNameList.add("edit16.png");
 		iconNameList.add("edit24.png");
 		iconNameList.add("edit32.png");
+		iconNameList.add("zoom.png");
 	}
 
 	private boolean loadIcon(){

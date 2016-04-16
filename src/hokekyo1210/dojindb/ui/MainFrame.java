@@ -18,7 +18,7 @@ public class MainFrame extends JFrame implements ActionListener{
 							height = 636;
 	
 	private MainFrame own;
-	private String title;
+	public String title;
 	
 	private InputPanel inputPanel;
 	private DBPanel dbPanel;
@@ -64,7 +64,7 @@ public class MainFrame extends JFrame implements ActionListener{
 		
 		inputPanel = new InputPanel(0,0,this);
 		dbPanel = new DBPanel(1,34,this);
-		rightPanel = new RightPanel(222,0);
+		rightPanel = new RightPanel(222,0,this);
 		this.add(inputPanel);
 		this.add(dbPanel);
 		this.add(rightPanel);
