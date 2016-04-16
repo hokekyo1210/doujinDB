@@ -2,6 +2,7 @@ package hokekyo1210.dojindb.plugins;
 
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
@@ -56,6 +57,7 @@ public class ReitaisaiLoader implements Runnable{///例大祭13用
 		}
 		
 		List<Root> tables = SQLManager.getTables();///全サークルをいったん読み込む
+		List<String> changed = new ArrayList<String>();
 		for(Root r:tables){
 			int a = r.getChildCount();
 			for(int i = 0;i < a;i++){
@@ -87,10 +89,14 @@ public class ReitaisaiLoader implements Runnable{///例大祭13用
 					}
 				}
 //				System.out.println(circleName + " " + tmp + " " + maxi);
-				if(distance <= maxi)
+				if(distance <= maxi){
 					tar.setCircleSpace(tmp2);
+					changed.add("["+tmp2+"]"+tar.getCircleName());
+				}
 			}
 		}
+		Collections.sort(changed);
+		for(String s:changed)System.out.println(s);
 		DBPanel.treeRefresh();///変更を伝える
 	}
 

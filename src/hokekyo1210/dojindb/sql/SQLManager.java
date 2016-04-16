@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import javax.swing.tree.TreeNode;
+
 import hokekyo1210.dojindb.ui.DBPanel;
 
 public class SQLManager {
@@ -20,6 +22,20 @@ public class SQLManager {
 	
 	public static List<Root> getTables(){
 		return tables;
+	}
+	
+	public static List<Node> getAllNodes(){///‘Sƒm[ƒh‚ğæ“¾‚·‚éO(N)
+		List<Node> ret = new ArrayList<Node>();
+		for(Root r:tables){
+			TreeNode n = (TreeNode)r;
+			for(int i = 0;i < n.getChildCount();i++){
+				TreeNode c = (TreeNode)n.getChildAt(i);
+				for(int j = 0;j < c.getChildCount();j++){
+					ret.add((Node)c.getChildAt(j));
+				}
+			}
+		}
+		return ret;
 	}
 	
 	public static void launchSQLManager() throws Exception{

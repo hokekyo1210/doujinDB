@@ -40,14 +40,7 @@ public class BarGraph extends JPopupMenu{
 	
 	public BarGraph(){
 		this.targets = new ArrayList<Node>();
-		for(Root r : SQLManager.getTables()){
-			for(int i = 0;i<r.getChildCount();i++){
-				TreeNode tn = r.getChildAt(i);
-				for(int j = 0;j<tn.getChildCount();j++){
-					targets.add((Node)tn.getChildAt(j));
-				}
-			}
-		}
+		this.targets = SQLManager.getAllNodes();
 		init();
 		initComponent();
 	}
