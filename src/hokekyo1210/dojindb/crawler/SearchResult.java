@@ -19,7 +19,7 @@ public class SearchResult{
 	}
 	
 	public void secondSearch() throws Exception{///確定したらページを読み込む
-		String url = "http://www.suruga-ya.jp/product/detail/"+id;
+		String url = "https://www.suruga-ya.jp/product/detail/"+id;
 		String ret = HtmlUtil.access(url,"adult=1").toString();
 //		System.out.println(ret);
 		

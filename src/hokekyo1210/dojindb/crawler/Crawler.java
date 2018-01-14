@@ -77,8 +77,8 @@ public class Crawler implements Runnable{
 			e1.printStackTrace();
 			return;
 		}
-		url = "http://www.suruga-ya.jp/search?category=11&search_word="+url+"&grid=f&inStock=On&adult_s=1";
-		url2 = "http://www.suruga-ya.jp/search?category=11&search_word="+url2+"&grid=f&inStock=On&adult_s=1&page=2";
+		url = "https://www.suruga-ya.jp/search?category=11&search_word="+url+"&grid=f&inStock=On&adult_s=1";
+		url2 = "https://www.suruga-ya.jp/search?category=11&search_word="+url2+"&grid=f&inStock=On&adult_s=1&page=2";
 		System.out.println("-----"+url+"-----");
 		System.out.println("-----"+url2+"-----");
 		try {
