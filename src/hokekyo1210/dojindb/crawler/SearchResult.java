@@ -23,8 +23,14 @@ public class SearchResult{
 		String ret = HtmlUtil.access(url,"adult=1").toString();
 //		System.out.println(ret);
 		
+		System.out.println("----Load Dojin----");
+		System.out.println("title: " + title);
+		System.out.println("circle: " + circle);
+		
 		String date = ret.split("発売日: ")[1].split("<br>")[0];
 		if(!date.equalsIgnoreCase("")){
+			String regex = "[^0-9/]";
+			date = date.replaceAll(regex, "");//日付に必要のない余計な文字を消す
 			String[] datesp = date.split("/");
 			year = datesp[0];
 			month = datesp[1];
@@ -34,14 +40,16 @@ public class SearchResult{
 		artist = getArtist(ret);
 		tags = new ArrayList<String>();
 		
-		String[] tmp = ret.split("\" zoom-photo-url=\"");
+//		System.out.println(ret);
+		
+		String[] tmp = ret.split("zoom-photo-url=\"");
 		if(tmp.length != 1){
 			imageURL = tmp[1].split("\" style=\"")[0];
 		}
-	
-		System.out.println(imageURL);
-		System.out.println(artist);
-		System.out.println(date);
+		
+		System.out.println("artist: " + artist);
+		System.out.println("imageURL: " + imageURL);
+		System.out.println("date: " + date);
 		/*for(String c:tags){
 			System.out.println(c);
 		}*/
